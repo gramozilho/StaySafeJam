@@ -40,7 +40,7 @@ text = "Game menu open"
 margin_top = 18.0
 margin_right = 115.0
 margin_bottom = 38.0
-text = "Reload level"
+text = "Restart level"
 __meta__ = {
 "_edit_use_anchors_": false
 }
