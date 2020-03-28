@@ -38,7 +38,7 @@ func die() -> void:
 	if (is_instance_valid(camera)):
 		remove_child(camera)
 	
-	AntManager.add_ant(self, camera, Vector2(320, 296))
+	AntManager.add_ant(self, camera, Vector2(512, 496))
 	call_deferred("free")
 	pass
 
@@ -47,12 +47,13 @@ func _physics_process(delta : float) -> void:
 		MOVEMENT_STATES.NORMAL:
 			if (Input.is_action_just_pressed("freeze_ant") && _is_floorcast_touching && AntManager.amount_of_ants < AntManager.max_ants):
 				state = MOVEMENT_STATES.FROZEN
+				$AnimatedSprite.modulate = Color(1.0, 1.0, 4.0)
 				
 				var camera : Camera2D = get_node("Camera2D")
 				if (is_instance_valid(camera)):
 					remove_child(camera)
 				
-				AntManager.add_ant(self, camera, Vector2(320, 296))
+				AntManager.add_ant(self, camera, Vector2(512, 496))
 			_movement(delta)
 			
 			if (!_is_floorcast_touching):
@@ -67,6 +68,7 @@ func _physics_process(delta : float) -> void:
 				if (_jump_before_land_timer.time_left > 0.0):
 					_velocity.y = JUMP_HEIGHT
 					_has_jumped = true
+					$AnimationPlayer.play("Jump")
 			move_and_slide(_velocity * delta, _floor_cast.get_collision_normal())
 		MOVEMENT_STATES.FROZEN:
 			_animated_sprite.stop()
@@ -127,6 +129,7 @@ func _movement(delta : float) -> void:
 	if (Input.is_action_just_pressed("move_jump") && !_has_jumped && (_is_floorcast_touching || _jump_after_fallen_timer.time_left > 0.0)):
 		_velocity.y = JUMP_HEIGHT
 		_has_jumped = true
+		$AnimationPlayer.play("Jump")
 	elif (Input.is_action_just_pressed("move_jump")):
 		_jump_before_land_timer.start()
 	

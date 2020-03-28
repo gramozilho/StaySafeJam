@@ -97,4 +97,5 @@ trigger_lose={
 [rendering]
 
 quality/2d/use_pixel_snap=true
+environment/default_clear_color=Color( 0.270588, 0.172549, 0.152941, 1 )
 environment/default_environment="res://Enviroments/default_env.tres"

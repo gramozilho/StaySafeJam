@@ -62,7 +62,7 @@ func goto_scene(path) -> void:
 		$GUI.visible = false
 
 func _deferred_goto_scene(path) -> void:
-	current_scene.free()
+	current_scene.call_deffered("free")
 	var s = ResourceLoader.load(path)
 	current_scene = s.instance()
 	get_tree().get_root().add_child(current_scene)

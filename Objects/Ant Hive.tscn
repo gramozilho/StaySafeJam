@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Sprites/Dumb House.png" type="Texture" id=1]
+
+[node name="Ant Hive" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -64 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -256, 0, -255, -74, -231, -150, -169, -266, -183, -416, -30, -427, -23, -388, -38, -383, -46, -332, 55, -325, 133, -309, 111, -143, 75, 0 )

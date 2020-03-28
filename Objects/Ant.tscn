@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Sprites/Ant_Spritesheet_32x16.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Ant.gd" type="Script" id=2]
@@ -64,6 +64,23 @@ animations = [ {
 "speed": 24.0
 } ]
 
+[sub_resource type="Animation" id=27]
+resource_name = "Jump"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, 4 ), Vector2( 3.5, 4.5 ), Vector2( 4, 4 ) ]
+}
+
 [node name="Ant" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
@@ -71,10 +88,17 @@ script = ExtResource( 2 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 14 )
 animation = "Walk"
+offset = Vector2( 0, -8 )
 
 [node name="FloorCast" type="RayCast2D" parent="."]
+position = Vector2( 0, -32 )
 enabled = true
 cast_to = Vector2( 0, 46 )
+
+[node name="WallCast" type="RayCast2D" parent="."]
+position = Vector2( 0, -32 )
+enabled = true
+cast_to = Vector2( 72, 0 )
 
 [node name="JumpBeforeLandTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -84,10 +108,11 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="WallCast" type="RayCast2D" parent="."]
-enabled = true
-cast_to = Vector2( 72, 0 )
-
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 35, -24, 13, -7, -4, -4, -31, 4, -56, 32, -28, 32, 7, 24, 51, 12, 52, -8.99999 )
+position = Vector2( 0, -32 )
+polygon = PoolVector2Array( 35, -24, 13, -7, -4, -4, -52, -1, -56, 32, -28, 32, 31, 26, 51, 12, 52, -8.99999 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/Jump = SubResource( 27 )
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
