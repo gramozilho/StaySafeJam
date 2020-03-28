@@ -14,6 +14,9 @@ var path_levels := [path_lvl1, path_lvl2, path_endscreen]
 const MSG_LEVEL_COMPLETED := "Level completed!"
 const MSG_LEVEL_FAILED := "Level failed :("
 
+const GAME_MENU_ON_X := 1370
+const GAME_MENU_OFF_X := 1950
+
 func _ready() -> void:
 	reset_menus()
 	update_current_scene()
@@ -40,11 +43,17 @@ func _process(delta : float) -> void:
 	pass
 
 func menu_transition(turn_on) -> void:
+	var current_x = $GameMenu.position.x
+	if turn_on:
+		$Tween.interpolate_property($GameMenu, "position:x", current_x, GAME_MENU_ON_X, .4, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	else:
+		$Tween.interpolate_property($GameMenu, "position:x", current_x, GAME_MENU_OFF_X, .3, Tween.TRANS_QUAD, Tween.EASE_IN)
 	menu_on = turn_on
-	$GameMenu.visible = turn_on
+	$Tween.start()
 
 func reset_menus() -> void:
-	self.menu_on = false
+	menu_on = false
+	$GameMenu.position.x = GAME_MENU_OFF_X
 	$EndScreen.visible = false
 	$GUI.visible = true
 	can_open_menu = true
@@ -53,7 +62,6 @@ func reset_menus() -> void:
 func _on_Restart_pressed() -> void:
 	reset_menus()
 	goto_scene(path_levels[current_level])
-	AntManager.amount_of_ants = 0
 	#goto_scene(path_levels[current_level])
 
 
@@ -63,6 +71,7 @@ func _on_BackToMenu_pressed() -> void:
 
 func goto_scene(path) -> void:
 	call_deferred("_deferred_goto_scene", path)
+	AntManager.amount_of_ants = 1
 	reset_menus()
 	if path == path_titlescreen:
 		$GUI.visible = false
