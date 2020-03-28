@@ -79,6 +79,11 @@ func _movement(delta : float) -> void:
 	
 	_velocity.x = lerp(_velocity.x, direction * MOVE_SPEED, ACCELERATION)
 	
+	if (direction < 0):
+		$Sprite.flip_h = true
+	elif (direction > 0):
+		$Sprite.flip_h = false
+	
 	if (_floor_cast.is_colliding() || is_on_floor()):
 		_is_floorcast_touching = true
 	else:

@@ -28,6 +28,7 @@ config/icon="res://Assets/Sprites/icon.png"
 
 Shortcuts="*res://Globals/Shortcuts.gd"
 AntManager="*res://Globals/AntManager.tscn"
+GUI="*res://Objects/GUI.tscn"
 
 [display]
 
@@ -81,4 +82,5 @@ freeze_ant={
 [rendering]
 
 quality/2d/use_pixel_snap=true
+environment/default_clear_color=Color( 0.352941, 0.427451, 0.54902, 1 )
 environment/default_environment="res://Enviroments/default_env.tres"
