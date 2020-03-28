@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://GUI/button_skin.tres" type="StyleBox" id=1]
+
+[node name="BaseButton" type="Button"]
+margin_right = 12.0
+margin_bottom = 20.0
+rect_scale = Vector2( 1.36813, 0.608015 )
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 1 )
+custom_styles/normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
