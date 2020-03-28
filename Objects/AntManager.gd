@@ -18,7 +18,6 @@ func add_ant(sender = null, camera : Camera2D = null, position := Vector2()) -> 
 		var ant_instance = ant_scene.instance()
 		ant_instance.global_position = position
 		
-		#get_tree().current_scene.call_deferred("add_child", ant_instance)
 		MenuHandler.current_scene.call_deferred("add_child", ant_instance)
 		
 		if (camera != null):
