@@ -1,25 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Sprites/white_square.png" type="Texture" id=1]
 [ext_resource path="res://Objects/MenuHandler.gd" type="Script" id=2]
+[ext_resource path="res://Assets/HUD/HUD_BG_Side.png" type="Texture" id=3]
 
 [node name="MenuHandler" type="CanvasLayer"]
 script = ExtResource( 2 )
 
-[node name="GameMenu" type="Control" parent="."]
-margin_left = 1303.82
-margin_top = -5.30005
-margin_right = 1303.82
-margin_bottom = -5.30005
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="GameMenu" type="Node2D" parent="."]
+position = Vector2( 1371.56, 1.49509 )
 
 [node name="Bg" type="Sprite" parent="GameMenu"]
-modulate = Color( 0.486275, 0.486275, 0.486275, 0.509804 )
-scale = Vector2( 10, 17 )
-texture = ExtResource( 1 )
-offset = Vector2( 32, 32 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+offset = Vector2( 64, 135 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameMenu"]
 margin_left = 196.103
@@ -40,7 +34,7 @@ text = "Game menu open"
 margin_top = 18.0
 margin_right = 115.0
 margin_bottom = 38.0
-text = "Reload level"
+text = "Restart level"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -126,6 +120,8 @@ margin_bottom = 14.0
 margin_top = 18.0
 margin_right = 40.0
 margin_bottom = 32.0
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="pressed" from="GameMenu/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="GameMenu/VBoxContainer/BackToMenu" to="." method="_on_BackToMenu_pressed"]
 [connection signal="pressed" from="EndScreen/VBoxContainer/Next" to="." method="_on_Next_pressed"]
