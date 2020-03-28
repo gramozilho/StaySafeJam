@@ -22,9 +22,14 @@ enabled = true
 cast_to = Vector2( 0, 32 )
 
 [node name="JumpBeforeLandTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="JumpAfterFallenTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
+
+[node name="WallCast" type="RayCast2D" parent="."]
+position = Vector2( 64, 0 )
+enabled = true
+cast_to = Vector2( 4, 0 )
