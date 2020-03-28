@@ -6,7 +6,7 @@
 [node name="Level 1" type="Node2D"]
 
 [node name="Ant" parent="." instance=ExtResource( 1 )]
-position = Vector2( 320, 496 )
+position = Vector2( 330.551, 306.075 )
 
 [node name="Camera2D" type="Camera2D" parent="Ant"]
 current = true
