@@ -48,6 +48,7 @@ func reset_menus() -> void:
 func _on_Restart_pressed() -> void:
 	reset_menus()
 	get_tree().reload_current_scene()
+	AntManager.amount_of_ants = 0
 	#goto_scene(path_levels[current_level])
 
 
