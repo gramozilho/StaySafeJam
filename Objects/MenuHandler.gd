@@ -20,7 +20,7 @@ func _ready():
 	current_scene = root.get_child(root.get_child_count() - 1)
 
 
-func _process(delta):
+func _process(delta : float) -> void:
 	# keeping the menu handling here for now to keep my work on separate scenes
 	if can_open_menu:
 		if Input.is_action_just_pressed("toggle_menu"): # later add check to assure not on title screen
@@ -29,16 +29,11 @@ func _process(delta):
 			win_screen()
 		if Input.is_action_just_pressed("trigger_lose"):
 			lose_screen()
-
-func _unhandled_input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT:
-			if event.pressed:
-				print("Left button was clicked at ", event.position)
-			else:
-				print("Left button was released")
-		if event.button_index == BUTTON_WHEEL_DOWN:
-			print("Wheel down")
+	
+	# Update GUI
+	$GUI/VBoxContainer/MaximumAntsLabel.text = "Max ants: "+ var2str(AntManager.max_ants)
+	$GUI/VBoxContainer/AntsLabel.text = "Used ants: "+ var2str(AntManager.amount_of_ants)
+	pass
 
 func menu_transition(turn_on):
 	menu_on = turn_on
@@ -48,6 +43,7 @@ func menu_transition(turn_on):
 func reset_menus():
 	self.menu_on = false
 	$EndScreen.visible = false
+	$GUI.visible = true
 	can_open_menu = true
 	
 
@@ -64,6 +60,8 @@ func _on_BackToMenu_pressed():
 func goto_scene(path):
 	call_deferred("_deferred_goto_scene", path)
 	reset_menus()
+	if path == path_titlescreen:
+		$GUI.visible = false
 
 
 func _deferred_goto_scene(path):

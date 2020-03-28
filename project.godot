@@ -28,7 +28,6 @@ config/icon="res://Assets/Sprites/icon.png"
 
 Shortcuts="*res://Globals/Shortcuts.gd"
 AntManager="*res://Globals/AntManager.tscn"
-Gui="*res://Objects/GUI.tscn"
 MenuHandler="*res://Objects/MenuHandler.tscn"
 
 [display]

@@ -7,6 +7,10 @@
 script = ExtResource( 2 )
 
 [node name="GameMenu" type="Control" parent="."]
+margin_left = 1303.82
+margin_top = -5.30005
+margin_right = 1303.82
+margin_bottom = -5.30005
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -18,11 +22,11 @@ texture = ExtResource( 1 )
 offset = Vector2( 32, 32 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameMenu"]
-margin_left = 127.202
-margin_top = 87.451
-margin_right = 242.202
-margin_bottom = 149.451
-rect_scale = Vector2( 3.04454, 4.51034 )
+margin_left = 196.103
+margin_top = 188.152
+margin_right = 311.103
+margin_bottom = 250.152
+rect_scale = Vector2( 1.96761, 2.28445 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,11 +68,11 @@ texture = ExtResource( 1 )
 offset = Vector2( 32, 32 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EndScreen"]
-margin_left = 813.163
-margin_top = 411.365
-margin_right = 866.163
-margin_bottom = 451.365
-rect_scale = Vector2( 3.38492, 3.09381 )
+margin_left = 823.763
+margin_top = 408.715
+margin_right = 923.763
+margin_bottom = 494.715
+rect_scale = Vector2( 2.22219, 2.16546 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -99,6 +103,26 @@ text = "Back to menu"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GUI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="MaximumAntsLabel" type="Label" parent="GUI/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="AntsLabel" type="Label" parent="GUI/VBoxContainer"]
+margin_top = 18.0
+margin_right = 40.0
+margin_bottom = 32.0
 [connection signal="pressed" from="GameMenu/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="GameMenu/VBoxContainer/BackToMenu" to="." method="_on_BackToMenu_pressed"]
 [connection signal="pressed" from="EndScreen/VBoxContainer/Next" to="." method="_on_Next_pressed"]
