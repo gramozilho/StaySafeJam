@@ -66,6 +66,8 @@ func _deferred_goto_scene(path) -> void:
 	var s = ResourceLoader.load(path)
 	current_scene = s.instance()
 	get_tree().get_root().add_child(current_scene)
+	pass
+
 
 func win_screen() -> void:
 	self.menu_on = false

@@ -55,7 +55,6 @@ func _physics_process(delta : float) -> void:
 				
 				AntManager.add_ant(self, camera, Vector2(512, 496))
 			
-			_animated_sprite.look_at(_floor_cast.get_collision_normal())
 			_movement(delta)
 			
 			if (!_is_floorcast_touching):
