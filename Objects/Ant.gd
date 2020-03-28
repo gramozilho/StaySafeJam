@@ -12,7 +12,9 @@ onready var _floor_cast := $FloorCast
 onready var _jump_before_land_timer := $JumpBeforeLandTimer
 onready var _jump_after_fallen_timer := $JumpAfterFallenTimer
 onready var _wall_cast := $WallCast
+onready var _animated_sprite := $AnimatedSprite
 
+var _direction := 0
 var _velocity := Vector2()
 
 var _is_floorcast_touching := false
@@ -43,9 +45,8 @@ func die() -> void:
 func _physics_process(delta : float) -> void:
 	match (state):
 		MOVEMENT_STATES.NORMAL:
-			if (Input.is_action_just_pressed("freeze_ant") && _is_floorcast_touching):
+			if (Input.is_action_just_pressed("freeze_ant") && _is_floorcast_touching && AntManager.amount_of_ants < AntManager.max_ants):
 				state = MOVEMENT_STATES.FROZEN
-				$Sprite.modulate = Color.red
 				
 				var camera : Camera2D = get_node("Camera2D")
 				if (is_instance_valid(camera)):
@@ -66,23 +67,47 @@ func _physics_process(delta : float) -> void:
 				if (_jump_before_land_timer.time_left > 0.0):
 					_velocity.y = JUMP_HEIGHT
 					_has_jumped = true
-			
-			move_and_slide(_velocity * delta, Vector2.UP)
+			move_and_slide(_velocity * delta, _floor_cast.get_collision_normal())
 		MOVEMENT_STATES.FROZEN:
+			_animated_sprite.stop()
+			_animated_sprite.animation = "Walk"
+			_animated_sprite.frame = 0
 			pass
 		MOVEMENT_STATES.DEAD:
 			pass
 	pass
 
 func _movement(delta : float) -> void:
-	var direction := int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	var previous_direction := _direction
+	_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	
-	_velocity.x = lerp(_velocity.x, direction * MOVE_SPEED, ACCELERATION)
+	_velocity.x = lerp(_velocity.x, _direction * MOVE_SPEED, ACCELERATION)
 	
-	if (direction < 0):
-		$Sprite.flip_h = true
-	elif (direction > 0):
-		$Sprite.flip_h = false
+	if (_wall_cast.is_colliding() && _direction != 0):
+		var collider = _wall_cast.get_collider()
+		if (collider.is_class("KinematicBody2D")):
+			position.y -= 16
+	
+	if (previous_direction != _direction && previous_direction != 0):
+		_animated_sprite.play("Slide")
+	
+	if (_direction < 0):
+		_animated_sprite.flip_h = true
+		$CollisionPolygon2D.scale.x = -1
+		_wall_cast.scale.x = -1
+		if (_animated_sprite.animation != "Slide"):
+			_animated_sprite.play("Walk")
+	elif (_direction > 0):
+		_animated_sprite.flip_h = false
+		$CollisionPolygon2D.scale.x = 1
+		_wall_cast.scale.x = 1
+		if (_animated_sprite.animation != "Slide"):
+			_animated_sprite.play("Walk")
+	else:
+		if (_animated_sprite.animation != "Slide"):
+			_animated_sprite.stop()
+			_animated_sprite.animation = "Walk"
+			_animated_sprite.frame = 0
 	
 	if (_floor_cast.is_colliding() || is_on_floor()):
 		_is_floorcast_touching = true
@@ -107,4 +132,8 @@ func _movement(delta : float) -> void:
 	
 	if (Input.is_action_just_released("move_jump") && _velocity.y < 0):
 		_velocity.y *= .5
+	pass
+
+func _on_AnimatedSprite_animation_finished() -> void:
+	_animated_sprite.animation = "Walk"
 	pass
