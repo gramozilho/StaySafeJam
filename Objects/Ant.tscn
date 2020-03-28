@@ -51,7 +51,7 @@ region = Rect2( 64, 32, 32, 16 )
 atlas = ExtResource( 1 )
 region = Rect2( 96, 32, 32, 16 )
 
-[sub_resource type="SpriteFrames" id=14]
+[sub_resource type="SpriteFrames" id=13]
 animations = [ {
 "frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
@@ -64,7 +64,7 @@ animations = [ {
 "speed": 24.0
 } ]
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=14]
 resource_name = "Jump"
 length = 0.5
 step = 0.05
@@ -86,14 +86,14 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
-frames = SubResource( 14 )
+frames = SubResource( 13 )
 animation = "Walk"
 offset = Vector2( 0, -8 )
 
 [node name="FloorCast" type="RayCast2D" parent="."]
 position = Vector2( 0, -32 )
 enabled = true
-cast_to = Vector2( 0, 46 )
+cast_to = Vector2( 0, 64 )
 
 [node name="WallCast" type="RayCast2D" parent="."]
 position = Vector2( 0, -32 )
@@ -114,5 +114,5 @@ polygon = PoolVector2Array( 35, -24, 13, -7, -4, -4, -52, -1, -56, 32, -28, 32, 
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
-anims/Jump = SubResource( 27 )
+anims/Jump = SubResource( 14 )
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
