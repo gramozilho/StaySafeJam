@@ -76,8 +76,6 @@ func _physics_process(delta : float) -> void:
 			_animated_sprite.animation = "Walk"
 			_animated_sprite.frame = 0
 			pass
-		MOVEMENT_STATES.DEAD:
-			pass
 	pass
 
 func _movement(delta : float) -> void:
