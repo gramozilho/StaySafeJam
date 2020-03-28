@@ -10,9 +10,11 @@ var path_lvl1 = "res://Scenes/Level 1.tscn"
 var path_lvl2 = "res://Scenes/Level 2.tscn"
 var path_levels = [path_lvl1, path_lvl2]
 
+const MSG_LEVEL_COMPLETED = "Level completed!"
+const MSG_LEVEL_FAILED = "Level failed :("
+
 func _ready():
 	reset_menus()
-
 	
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
@@ -28,6 +30,15 @@ func _process(delta):
 		if Input.is_action_just_pressed("trigger_lose"):
 			lose_screen()
 
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT:
+			if event.pressed:
+				print("Left button was clicked at ", event.position)
+			else:
+				print("Left button was released")
+		if event.button_index == BUTTON_WHEEL_DOWN:
+			print("Wheel down")
 
 func menu_transition(turn_on):
 	menu_on = turn_on
@@ -64,14 +75,14 @@ func _deferred_goto_scene(path):
 func win_screen():
 	self.menu_on = false
 	can_open_menu = false
-	$EndScreen/VBoxContainer/EndMessage.text = "You won!"
+	$EndScreen/VBoxContainer/EndMessage.text = MSG_LEVEL_COMPLETED
 	$EndScreen/VBoxContainer/Next.visible = true
 	$EndScreen.visible = true
 
 func lose_screen():
 	self.menu_on = false
 	can_open_menu = false
-	$EndScreen/VBoxContainer/EndMessage.text = "You lose :("
+	$EndScreen/VBoxContainer/EndMessage.text = MSG_LEVEL_FAILED
 	$EndScreen/VBoxContainer/Next.visible = false
 	$EndScreen.visible = true
 	
