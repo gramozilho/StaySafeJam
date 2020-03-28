@@ -15,10 +15,15 @@ onready var _jump_after_fallen_timer := $JumpAfterFallenTimer
 var _velocity : Vector2
 
 var _is_floorcast_touching := false
+var _is_falling := false
+
+var _has_just_fallen := false
+var _has_jumped := false
 
 enum MOVEMENT_STATES {
 	NORMAL,
 	FROZEN,
+	DEAD,
 }
 
 var state = MOVEMENT_STATES.NORMAL
@@ -37,10 +42,26 @@ func _physics_process(delta : float) -> void:
 				if (is_instance_valid(camera)):
 					remove_child(camera)
 				
-				AntManager.add_ant(camera, Vector2(320, 296))
+				AntManager.add_ant(self, camera, Vector2(320, 296))
 			_movement(delta)
+			
+			if (!_is_floorcast_touching):
+				if (!_is_falling && !_has_jumped):
+					_has_just_fallen = true
+					_jump_after_fallen_timer.start()
+				_is_falling = true
+				_has_just_fallen = false
+			else:
+				_is_falling = false
+				_has_jumped = false
+				if (_jump_before_land_timer.time_left > 0.0):
+					_velocity.y = JUMP_HEIGHT
+					_has_jumped = true
+			
 			move_and_slide(_velocity * delta, Vector2.UP)
 		MOVEMENT_STATES.FROZEN:
+			pass
+		MOVEMENT_STATES.DEAD:
 			pass
 	pass
 
@@ -61,8 +82,11 @@ func _movement(delta : float) -> void:
 	if (is_on_ceiling()):
 		_velocity.y = GRAVITY
 	
-	if (Input.is_action_just_pressed("move_jump") && _is_floorcast_touching):
+	if (Input.is_action_just_pressed("move_jump") && !_has_jumped && (_is_floorcast_touching || _jump_after_fallen_timer.time_left > 0.0)):
 		_velocity.y = JUMP_HEIGHT
+		_has_jumped = true
+	elif (Input.is_action_just_pressed("move_jump")):
+		_jump_before_land_timer.start()
 	
 	if (Input.is_action_just_released("move_jump") && _velocity.y < 0):
 		_velocity.y *= .5
