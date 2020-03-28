@@ -62,12 +62,14 @@ func _deferred_goto_scene(path):
 	get_tree().get_root().add_child(current_scene)
 
 func win_screen():
+	self.menu_on = false
 	can_open_menu = false
 	$EndScreen/VBoxContainer/EndMessage.text = "You won!"
 	$EndScreen/VBoxContainer/Next.visible = true
 	$EndScreen.visible = true
 
 func lose_screen():
+	self.menu_on = false
 	can_open_menu = false
 	$EndScreen/VBoxContainer/EndMessage.text = "You lose :("
 	$EndScreen/VBoxContainer/Next.visible = false
