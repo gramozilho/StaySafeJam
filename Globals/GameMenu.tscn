@@ -1,0 +1,95 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Sprites/white_square.png" type="Texture" id=1]
+[ext_resource path="res://Globals/MenuHandler.gd" type="Script" id=2]
+
+[node name="MenuHandler" type="Node2D"]
+z_index = 1
+script = ExtResource( 2 )
+
+[node name="GameMenu" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg" type="Sprite" parent="GameMenu"]
+modulate = Color( 0.486275, 0.486275, 0.486275, 0.509804 )
+scale = Vector2( 10, 17 )
+texture = ExtResource( 1 )
+offset = Vector2( 32, 32 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameMenu"]
+margin_right = 115.0
+margin_bottom = 62.0
+rect_scale = Vector2( 3.04454, 4.51034 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="Label" parent="GameMenu/VBoxContainer"]
+margin_right = 115.0
+margin_bottom = 14.0
+text = "Game menu open"
+
+[node name="Reload" type="Button" parent="GameMenu/VBoxContainer"]
+margin_top = 18.0
+margin_right = 115.0
+margin_bottom = 38.0
+text = "Reload level"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackToMenu" type="Button" parent="GameMenu/VBoxContainer"]
+margin_top = 42.0
+margin_right = 115.0
+margin_bottom = 62.0
+text = "Back to menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndScreen" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg" type="Sprite" parent="EndScreen"]
+modulate = Color( 0.486275, 0.486275, 0.486275, 0.509804 )
+scale = Vector2( 30.1402, 17 )
+texture = ExtResource( 1 )
+offset = Vector2( 32, 32 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen"]
+margin_left = 813.163
+margin_top = 411.365
+margin_right = 866.163
+margin_bottom = 451.365
+rect_scale = Vector2( 3.38492, 3.09381 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndMessage" type="Label" parent="EndScreen/VBoxContainer"]
+margin_right = 77.0
+margin_bottom = 14.0
+text = "You won!"
+align = 1
+
+[node name="Next" type="Button" parent="EndScreen/VBoxContainer"]
+margin_top = 18.0
+margin_right = 77.0
+margin_bottom = 38.0
+text = "Next level"
+
+[node name="Restart" type="Button" parent="EndScreen/VBoxContainer"]
+margin_top = 42.0
+margin_right = 77.0
+margin_bottom = 62.0
+text = "Next level"
+[connection signal="pressed" from="GameMenu/VBoxContainer/Reload" to="." method="_on_Reload_pressed"]
+[connection signal="pressed" from="GameMenu/VBoxContainer/BackToMenu" to="." method="_on_BackToMenu_pressed"]
