@@ -45,7 +45,7 @@ func die() -> void:
 func _physics_process(delta : float) -> void:
 	match (state):
 		MOVEMENT_STATES.NORMAL:
-			if (Input.is_action_just_pressed("freeze_ant") && _is_floorcast_touching && AntManager.amount_of_ants < AntManager.max_ants):
+			if (Input.is_action_just_pressed("freeze_ant") && _is_floorcast_touching):  # && AntManager.amount_of_ants < AntManager.max_ants):
 				state = MOVEMENT_STATES.FROZEN
 				$AnimatedSprite.modulate = Color(1.0, 1.0, 4.0)
 				
