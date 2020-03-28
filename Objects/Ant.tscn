@@ -95,7 +95,7 @@ offset = Vector2( 0, -8 )
 [node name="FloorCast" type="RayCast2D" parent="."]
 position = Vector2( 0, -32 )
 enabled = true
-cast_to = Vector2( 0, 46 )
+cast_to = Vector2( 0, 64 )
 
 [node name="WallCast" type="RayCast2D" parent="."]
 position = Vector2( 0, -32 )
