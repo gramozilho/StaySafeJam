@@ -29,6 +29,7 @@ config/icon="res://Assets/Sprites/icon.png"
 Shortcuts="*res://Globals/Shortcuts.gd"
 AntManager="*res://Globals/AntManager.tscn"
 MenuHandler="*res://Objects/MenuHandler.tscn"
+PostProcessingEffects="*res://Objects/Post Processing Effects.tscn"
 
 [display]
 

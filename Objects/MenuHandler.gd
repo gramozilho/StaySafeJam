@@ -25,7 +25,6 @@ func _ready() -> void:
 func update_current_scene():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
-	print("current_scene: ", current_scene)
 
 func _process(delta : float) -> void:
 	# keeping the menu handling here for now to keep my work on separate scenes
@@ -64,10 +63,8 @@ func _on_Restart_pressed() -> void:
 	goto_scene(path_levels[current_level])
 	#goto_scene(path_levels[current_level])
 
-
 func _on_BackToMenu_pressed() -> void:
 	goto_scene(path_titlescreen)
-
 
 func goto_scene(path) -> void:
 	call_deferred("_deferred_goto_scene", path)
@@ -82,7 +79,6 @@ func _deferred_goto_scene(path) -> void:
 	current_scene = s.instance()
 	get_tree().get_root().add_child(current_scene)
 	pass
-
 
 func win_screen() -> void:
 	self.menu_on = false
