@@ -53,7 +53,6 @@ func reset_menus() -> void:
 func _on_Restart_pressed() -> void:
 	reset_menus()
 	goto_scene(path_levels[current_level])
-	AntManager.amount_of_ants = 0
 	#goto_scene(path_levels[current_level])
 
 
@@ -63,6 +62,7 @@ func _on_BackToMenu_pressed() -> void:
 
 func goto_scene(path) -> void:
 	call_deferred("_deferred_goto_scene", path)
+	AntManager.amount_of_ants = 0
 	reset_menus()
 	if path == path_titlescreen:
 		$GUI.visible = false
