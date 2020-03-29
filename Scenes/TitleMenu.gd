@@ -35,3 +35,16 @@ func _on_Level_Select_pressed():
 	else:
 		$Tween.interpolate_property($LevelSelect, "position:x", current_x, LEVEL_SELECT_OFF, .3, Tween.TRANS_QUAD, Tween.EASE_IN)
 	$Tween.start()
+	$Button.play()
+
+
+func _on_Lvl4_pressed():
+	MenuHandler.go_to_lvl(4)
+
+
+func _on_Lvl5_pressed():
+	MenuHandler.go_to_lvl(5)
+
+
+func _on_Lvl6_pressed():
+	MenuHandler.go_to_lvl(6)

@@ -10,8 +10,12 @@ var path_cutscene := "res://GUI/CutscenePlayer.tscn"
 var path_lvl1 := "res://Scenes/Level 1.tscn"
 var path_lvl2 := "res://Scenes/Level 2.tscn"
 var path_lvl3 := "res://Scenes/Level 3.tscn"
+var path_lvl4 := "res://Scenes/Level 4.tscn"
+var path_lvl5 := "res://Scenes/Level 5.tscn"
+var path_lvl6 := "res://Scenes/Level 6.tscn"
 var path_endscreen := "res://Scenes/EndScreen.tscn"
-var path_levels := [path_cutscene, path_lvl1, path_lvl2, path_lvl3, path_endscreen]
+var path_levels := [path_cutscene, path_lvl1, path_lvl2, path_lvl3, path_lvl4, \
+	path_lvl5, path_lvl6, path_endscreen]
 
 const MSG_LEVEL_COMPLETED := "Level completed!"
 const MSG_LEVEL_FAILED := "Level failed :("

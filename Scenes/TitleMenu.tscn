@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/TitleMenu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/HUD/splash1.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://GUI/SimpleButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/HUD/HUD_Side_FirstRopes.png" type="Texture" id=6]
 [ext_resource path="res://Assets/HUD/HUD_BG_Side.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sounds/ButtonPress.wav" type="AudioStream" id=8]
 
 [node name="TitleMenu" type="Control"]
 anchor_right = 1.0
@@ -55,7 +56,9 @@ margin_right = 153.0
 margin_bottom = 102.0
 text = "Exit game"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Button" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -10.0
 
 [node name="LevelSelect" type="Node2D" parent="."]
 position = Vector2( 2000, 0 )
@@ -66,7 +69,12 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 7 )
 
 [node name="Ropes" type="Sprite" parent="LevelSelect"]
-position = Vector2( 263.001, 399.343 )
+position = Vector2( 256.185, 399.343 )
+scale = Vector2( 3, 16 )
+texture = ExtResource( 6 )
+
+[node name="Ropes2" type="Sprite" parent="LevelSelect"]
+position = Vector2( 256.185, 594.343 )
 scale = Vector2( 3, 16 )
 texture = ExtResource( 6 )
 
@@ -109,6 +117,27 @@ margin_right = 128.0
 margin_bottom = 144.0
 text = "Level 3"
 
+[node name="Lvl4" parent="LevelSelect/VBoxContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+margin_top = 148.0
+margin_right = 128.0
+margin_bottom = 178.0
+text = "Level 4"
+
+[node name="Lvl5" parent="LevelSelect/VBoxContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+margin_top = 182.0
+margin_right = 128.0
+margin_bottom = 212.0
+text = "Level 5"
+
+[node name="Lvl6" parent="LevelSelect/VBoxContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+margin_top = 216.0
+margin_right = 128.0
+margin_bottom = 246.0
+text = "Level 6"
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 1758.09, 947.516 )
 scale = Vector2( 4, 4 )
@@ -121,3 +150,6 @@ texture = ExtResource( 4 )
 [connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl1" to="." method="_on_Lvl1_pressed"]
 [connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl2" to="." method="_on_Lvl2_pressed"]
 [connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl3" to="." method="_on_Lvl3_pressed"]
+[connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl4" to="." method="_on_Lvl4_pressed"]
+[connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl5" to="." method="_on_Lvl5_pressed"]
+[connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl6" to="." method="_on_Lvl6_pressed"]
