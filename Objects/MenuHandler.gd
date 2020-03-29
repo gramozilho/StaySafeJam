@@ -181,3 +181,6 @@ func end_game() -> void:
 	
 func hide_GUI() -> void:
 	$GUI.visible = false
+
+func go_to_lvl(lvl):
+	goto_scene(path_levels[lvl])
