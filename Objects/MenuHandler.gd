@@ -141,20 +141,20 @@ func end_level_screen(win) -> void:
 func transition_on(turn_on) -> void:
 	if turn_on:
 		$TweenTransition.interpolate_property($Transition.get_material(), "shader_param/cutoff", 1.0, 0.0, TRANSITION_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
-		$TweenTransition.interpolate_property($LeftSide, "position/x", \
+		$TweenTransition.interpolate_property($LeftSide, "position:x", \
 			TRANSITION_LEFT, TRANSITION_CENTER, TRANSITION_TIME, \
 			Tween.TRANS_LINEAR, Tween.EASE_IN)
-		$TweenTransition.interpolate_property($RightSide, "position/x", \
+		$TweenTransition.interpolate_property($RightSide, "position:x", \
 			TRANSITION_RIGHT, TRANSITION_CENTER, TRANSITION_TIME, \
 			Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$LeftSide/CloseSound1.play()
 		$RightSide/CloseSound2.play()
 	else:
 		$TweenTransition.interpolate_property($Transition.get_material(), "shader_param/cutoff", 0.0, 1.0, TRANSITION_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
-		$TweenTransition.interpolate_property($LeftSide, "position/x", \
+		$TweenTransition.interpolate_property($LeftSide, "position:x", \
 			TRANSITION_CENTER, TRANSITION_LEFT, TRANSITION_TIME, \
 			Tween.TRANS_LINEAR, Tween.EASE_IN)
-		$TweenTransition.interpolate_property($RightSide, "position/x", \
+		$TweenTransition.interpolate_property($RightSide, "position:x", \
 			TRANSITION_CENTER, TRANSITION_RIGHT, TRANSITION_TIME, \
 			Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$LeftSide/OpenSound1.play()

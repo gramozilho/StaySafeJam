@@ -8,7 +8,8 @@ const ACCELERATION : = .5
 
 var _speed := MOVE_SPEED
 
-onready var _floor_cast := $FloorCast
+onready var _left_floor_cast := $LeftFloorCast
+onready var _right_floor_cast := $RightFloorCast
 onready var _jump_before_land_timer := $JumpBeforeLandTimer
 onready var _jump_after_fallen_timer := $JumpAfterFallenTimer
 onready var _wall_cast := $WallCast
@@ -65,7 +66,12 @@ func _physics_process(delta : float) -> void:
 					_velocity.y = JUMP_HEIGHT
 					_has_jumped = true
 					$AnimationPlayer.play("Jump")
-			move_and_slide_with_snap(_velocity * delta, -_floor_cast.get_collision_normal(), _floor_cast.get_collision_normal(), true)
+			if (-_left_floor_cast.get_collision_normal() != Vector2.ZERO):
+				move_and_slide_with_snap(_velocity * delta, -_left_floor_cast.get_collision_normal(), _left_floor_cast.get_collision_normal(), true)
+			elif (-_right_floor_cast.get_collision_normal() != Vector2.ZERO):
+				move_and_slide_with_snap(_velocity * delta, -_right_floor_cast.get_collision_normal(), _right_floor_cast.get_collision_normal(), true)
+			else:
+				move_and_slide_with_snap(_velocity * delta, Vector2(0, 1), Vector2(0, -1), true)
 		MOVEMENT_STATES.FROZEN:
 			_animated_sprite.stop()
 			_animated_sprite.animation = "Walk"
@@ -82,8 +88,10 @@ func freeze():
 func _movement(delta : float) -> void:
 	randomize()
 	
-	if (_floor_cast.is_colliding() && _floor_cast.get_collision_normal().x == 0):
-			gravity = -_floor_cast.get_collision_normal()
+	if (_left_floor_cast.is_colliding() && _left_floor_cast.get_collision_normal().x == 0):
+			gravity = -_left_floor_cast.get_collision_normal()
+	elif (_right_floor_cast.is_colliding() && _right_floor_cast.get_collision_normal().x == 0):
+		gravity = -_right_floor_cast.get_collision_normal()
 	else:
 		gravity = Vector2(0, 1)
 	
@@ -113,7 +121,6 @@ func _movement(delta : float) -> void:
 	if (_direction < 0):
 		_animated_sprite.flip_h = true
 		$CollisionShape2D.scale.x = -1
-		$FloorCast.cast_to = Vector2(-48, 64)
 		_wall_cast.scale.x = -1
 		if (_animated_sprite.animation != "Slide"):
 			_animated_sprite.play("Walk")
@@ -121,7 +128,6 @@ func _movement(delta : float) -> void:
 		_animated_sprite.flip_h = false
 		$CollisionShape2D.scale.x = 1
 		_wall_cast.scale.x = 1
-		$FloorCast.cast_to = Vector2(48, 64)
 		if (_animated_sprite.animation != "Slide"):
 			_animated_sprite.play("Walk")
 	else:
@@ -130,9 +136,11 @@ func _movement(delta : float) -> void:
 			_animated_sprite.animation = "Walk"
 			_animated_sprite.frame = 0
 	
-	if (_floor_cast.is_colliding()):
-		if (_floor_cast.get_collider().is_in_group("Walkable")):
+	if (_left_floor_cast.is_colliding()):
+		if (_left_floor_cast.get_collider().is_in_group("Walkable")):
 			_is_floorcast_touching = true
+	elif (_right_floor_cast.is_colliding()):
+		if (_right_floor_cast.get_collider().is_in_group("Walkable")):
 			_is_floorcast_touching = true
 	elif (is_on_floor()):
 		_is_floorcast_touching = true

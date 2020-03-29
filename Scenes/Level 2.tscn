@@ -130,7 +130,9 @@ texture = ExtResource( 8 )
 [node name="Ant Hive" parent="." instance=ExtResource( 3 )]
 position = Vector2( 320, 448.533 )
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=[
+"Walkable",
+]]
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
