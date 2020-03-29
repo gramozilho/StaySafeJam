@@ -6,11 +6,12 @@ var can_open_menu := true
 var current_level := 0
 
 var path_titlescreen := "res://Scenes/TitleMenu.tscn"
+var path_cutscene := "res://GUI/CutscenePlayer.tscn"
 var path_lvl1 := "res://Scenes/Level 1.tscn"
 var path_lvl2 := "res://Scenes/Level 2.tscn"
 var path_lvl3 := "res://Scenes/Level 3.tscn"
 var path_endscreen := "res://Scenes/EndScreen.tscn"
-var path_levels := [path_lvl1, path_lvl2, path_lvl3, path_endscreen]
+var path_levels := [path_cutscene, path_lvl1, path_lvl2, path_lvl3, path_endscreen]
 
 const MSG_LEVEL_COMPLETED := "Level completed!"
 const MSG_LEVEL_FAILED := "Level failed :("
@@ -71,7 +72,7 @@ func reset_menus() -> void:
 	$EndScreen.visible = false
 
 func check_GUI(path):
-	if path in [path_titlescreen, path_endscreen]:
+	if path in [path_titlescreen, path_endscreen, path_cutscene]:
 		$GUI.visible = false
 		can_open_menu = false
 	else:
@@ -92,7 +93,7 @@ func goto_scene(path) -> void:
 	call_deferred("_deferred_goto_scene", path)
 	AntManager.amount_of_ants = 1
 	#reset_menus()
-	$GameMenu/VBoxContainer/BaseSign.text = "Level " + String(current_level+1)  #current_scene.name
+	$GameMenu/VBoxContainer/BaseSign.text = "Level " + String(current_level)  #current_scene.name
 	#check_GUI()
 	#if path == path_titlescreen:
 	#	$GUI.visible = false
@@ -166,6 +167,9 @@ func _on_Next_pressed() -> void:
 	goto_scene(path_levels[current_level])
 	if current_level == len(path_levels):
 		can_open_menu = false
+
+func out_of_cutscene() -> void:
+	_on_Next_pressed()
 
 func start_game() -> void:
 	current_level = 0
