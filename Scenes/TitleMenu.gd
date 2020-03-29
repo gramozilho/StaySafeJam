@@ -1,5 +1,8 @@
 extends Control
 
+func _ready():
+	MenuHandler.hide_GUI()
+
 func _on_Back_pressed():
 	MenuHandler.end_game()
 

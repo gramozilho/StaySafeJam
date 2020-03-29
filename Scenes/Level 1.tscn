@@ -152,7 +152,7 @@ tile_data = PoolIntArray( -1, 1, 0, -65536, 1, 1, -65535, 1, 1, -65534, 1, 1, -6
 position = Vector2( 508, 512 )
 
 [node name="Camera2D" type="Camera2D" parent="Ant"]
-position = Vector2( 0, -3.05176e-005 )
+position = Vector2( 0, -3.05176e-05 )
 current = true
 limit_left = 0
 limit_top = 0
@@ -167,4 +167,4 @@ drag_margin_bottom = 0.0
 editor_draw_limits = true
 
 [node name="Candy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2806, 454 )
+position = Vector2( 2738.34, 421.229 )

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/CandyPickup.wav-32fa120f99263a8ed05b5e6e9309ccf2.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/CandyPickup.wav"
+dest_files=[ "res://.import/CandyPickup.wav-32fa120f99263a8ed05b5e6e9309ccf2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

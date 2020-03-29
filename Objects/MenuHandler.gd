@@ -17,9 +17,15 @@ const MSG_LEVEL_FAILED := "Level failed :("
 const GAME_MENU_ON_X := 1370
 const GAME_MENU_OFF_X := 1950
 
+const TRANSITION_TIME := 0.3
+const TRANSITION_LEFT := 0
+const TRANSITION_RIGHT := 1920
+const TRANSITION_CENTER := 960
+
 func _ready() -> void:
 	reset_menus()
 	update_current_scene()
+	can_open_menu = false
 
 
 func update_current_scene():
@@ -33,6 +39,7 @@ func _process(delta : float) -> void:
 	if can_open_menu:
 		if Input.is_action_just_pressed("toggle_menu"): # later add check to assure not on title screen
 			self.menu_on = !self.menu_on
+			$Button.play()
 		if Input.is_action_just_pressed("trigger_win"):
 			win_screen()
 		if Input.is_action_just_pressed("trigger_lose"):
@@ -61,7 +68,9 @@ func reset_menus() -> void:
 	menu_on = false
 	$GameMenu.position.x = GAME_MENU_OFF_X
 	$EndScreen.visible = false
-	if path_levels[current_level] == path_endscreen:
+
+func check_GUI(path):
+	if path in [path_titlescreen, path_endscreen]:
 		$GUI.visible = false
 		can_open_menu = false
 	else:
@@ -72,7 +81,6 @@ func reset_menus() -> void:
 func _on_Restart_pressed() -> void:
 	reset_menus()
 	goto_scene(path_levels[current_level])
-	#goto_scene(path_levels[current_level])
 
 func _on_BackToMenu_pressed() -> void:
 	goto_scene(path_titlescreen)
@@ -82,10 +90,11 @@ func _on_BackToMenu_pressed() -> void:
 func goto_scene(path) -> void:
 	call_deferred("_deferred_goto_scene", path)
 	AntManager.amount_of_ants = 1
-	reset_menus()
+	#reset_menus()
 	$GameMenu/VBoxContainer/BaseSign.text = "Level " + String(current_level+1)  #current_scene.name
-	if path == path_titlescreen:
-		$GUI.visible = false
+	#check_GUI()
+	#if path == path_titlescreen:
+	#	$GUI.visible = false
 
 func _deferred_goto_scene(path) -> void:
 	transition_on(true)
@@ -95,6 +104,8 @@ func _deferred_goto_scene(path) -> void:
 	var s = ResourceLoader.load(path)
 	current_scene = s.instance()
 	get_tree().get_root().add_child(current_scene)
+	reset_menus()
+	check_GUI(path)
 	transition_on(false)
 	pass
 
@@ -127,9 +138,25 @@ func end_level_screen(win) -> void:
 
 func transition_on(turn_on) -> void:
 	if turn_on:
-		$TweenTransition.interpolate_property($Transition.get_material(), "shader_param/cutoff", 1.0, 0.0, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$TweenTransition.interpolate_property($Transition.get_material(), "shader_param/cutoff", 1.0, 0.0, TRANSITION_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$TweenTransition.interpolate_property($LeftSide, "position/x", \
+			TRANSITION_LEFT, TRANSITION_CENTER, TRANSITION_TIME, \
+			Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$TweenTransition.interpolate_property($RightSide, "position/x", \
+			TRANSITION_RIGHT, TRANSITION_CENTER, TRANSITION_TIME, \
+			Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$LeftSide/CloseSound1.play()
+		$RightSide/CloseSound2.play()
 	else:
-		$TweenTransition.interpolate_property($Transition.get_material(), "shader_param/cutoff", 0.0, 1.0, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$TweenTransition.interpolate_property($Transition.get_material(), "shader_param/cutoff", 0.0, 1.0, TRANSITION_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$TweenTransition.interpolate_property($LeftSide, "position/x", \
+			TRANSITION_CENTER, TRANSITION_LEFT, TRANSITION_TIME, \
+			Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$TweenTransition.interpolate_property($RightSide, "position/x", \
+			TRANSITION_CENTER, TRANSITION_RIGHT, TRANSITION_TIME, \
+			Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$LeftSide/OpenSound1.play()
+		$RightSide/OpenSound2.play()
 	$TweenTransition.start()
 
 func _on_Next_pressed() -> void:
@@ -147,3 +174,5 @@ func end_game() -> void:
 	current_level = 0
 	goto_scene(path_titlescreen)
 	
+func hide_GUI() -> void:
+	$GUI.visible = false
