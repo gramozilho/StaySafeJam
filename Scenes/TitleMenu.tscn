@@ -117,25 +117,25 @@ margin_right = 128.0
 margin_bottom = 144.0
 text = "Level 3"
 
-[node name="Lvl4" parent="LevelSelect/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Lvl4" parent="LevelSelect/VBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
-margin_top = 147.0
+margin_top = 148.0
 margin_right = 128.0
-margin_bottom = 189.163
+margin_bottom = 178.0
 text = "Level 4"
 
-[node name="Lvl5" parent="LevelSelect/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Lvl5" parent="LevelSelect/VBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
-margin_top = 193.0
+margin_top = 182.0
 margin_right = 128.0
-margin_bottom = 235.163
+margin_bottom = 212.0
 text = "Level 5"
 
-[node name="Lvl6" parent="LevelSelect/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Lvl6" parent="LevelSelect/VBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
-margin_top = 239.0
+margin_top = 216.0
 margin_right = 128.0
-margin_bottom = 281.163
+margin_bottom = 246.0
 text = "Level 6"
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -150,3 +150,6 @@ texture = ExtResource( 4 )
 [connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl1" to="." method="_on_Lvl1_pressed"]
 [connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl2" to="." method="_on_Lvl2_pressed"]
 [connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl3" to="." method="_on_Lvl3_pressed"]
+[connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl4" to="." method="_on_Lvl4_pressed"]
+[connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl5" to="." method="_on_Lvl5_pressed"]
+[connection signal="pressed" from="LevelSelect/VBoxContainer/Lvl6" to="." method="_on_Lvl6_pressed"]

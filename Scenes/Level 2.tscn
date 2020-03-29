@@ -162,7 +162,7 @@ tile_data = PoolIntArray( -1, 1, 0, -65536, 1, 1, -65535, 1, 5, -65534, 1, 19660
 position = Vector2( 508, 448.533 )
 
 [node name="Camera2D" type="Camera2D" parent="Ant"]
-position = Vector2( 0, -3.05176e-005 )
+position = Vector2( 0, -3.05176e-05 )
 current = true
 limit_left = 0
 limit_top = 0

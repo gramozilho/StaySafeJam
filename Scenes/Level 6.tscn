@@ -181,7 +181,7 @@ scale = Vector2( 4.28961, 4.36325 )
 position = Vector2( 451.759, 575.796 )
 
 [node name="Camera2D" type="Camera2D" parent="Ant"]
-position = Vector2( 0, 3.05176e-005 )
+position = Vector2( 0, 3.05176e-05 )
 current = true
 limit_left = 0
 limit_top = 0
@@ -234,5 +234,5 @@ position = Vector2( 1762, 951 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Water6"]
 shape = SubResource( 2 )
 
-[node name="SpawnPoint" type="Position2D" parent="."]
+[node name="Spawn Point" type="Position2D" parent="."]
 position = Vector2( 512, 512 )
