@@ -149,7 +149,9 @@ position = Vector2( 2399, 449 )
 [node name="Flower4" parent="Flowers" instance=ExtResource( 11 )]
 position = Vector2( 933, 957 )
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=[
+"Walkable",
+]]
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
