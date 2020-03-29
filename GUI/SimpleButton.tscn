@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://GUI/simple_sign_skin.tres" type="StyleBox" id=1]
 [ext_resource path="res://Assets/Fonts/NormalFont.tres" type="DynamicFontData" id=2]
+[ext_resource path="res://GUI/SimpleButton.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )
@@ -18,6 +19,9 @@ custom_styles/disabled = ExtResource( 1 )
 custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = SubResource( 1 )
 text = "aa"
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="mouse_entered" from="." to="." method="_on_BaseButton_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_BaseButton_mouse_exited"]
