@@ -19,7 +19,7 @@ func add_ant(sender = null, camera : Camera2D = null, position := Vector2()) -> 
 		ant_instance.global_position = position
 		
 		MenuHandler.current_scene.call_deferred("add_child", ant_instance)
-		
+		ant_instance.global_position = MenuHandler.current_scene.find_node("Spawn Point").global_position
 		if (camera != null):
 			ant_instance.call_deferred("add_child", camera)
 			var sender_node = sender as Node2D
