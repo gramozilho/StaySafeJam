@@ -165,7 +165,7 @@ position = Vector2( 2336, 256 )
 position = Vector2( 508, 579 )
 
 [node name="Camera2D" type="Camera2D" parent="Ant"]
-position = Vector2( 0, 3.05176e-05 )
+position = Vector2( 0, 3.05176e-005 )
 current = true
 limit_left = 0
 limit_top = 0

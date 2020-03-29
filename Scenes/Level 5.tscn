@@ -181,7 +181,7 @@ scale = Vector2( 4.28961, 4.36325 )
 position = Vector2( 451.759, 575.796 )
 
 [node name="Camera2D" type="Camera2D" parent="Ant"]
-position = Vector2( 0, 3.05176e-05 )
+position = Vector2( 0, 3.05176e-005 )
 current = true
 limit_left = 0
 limit_top = 0
