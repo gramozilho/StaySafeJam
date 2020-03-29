@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Frog_Anim.png-f9f76e4f106bb089faef2e6a2f80b8ab.stex"
+path="res://.import/TabKey.png-950451e26d24faa775ff56f5b9f25fe6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Frog_Anim.png"
-dest_files=[ "res://.import/Frog_Anim.png-f9f76e4f106bb089faef2e6a2f80b8ab.stex" ]
+source_file="res://Assets/Sprites/TabKey.png"
+dest_files=[ "res://.import/TabKey.png-950451e26d24faa775ff56f5b9f25fe6.stex" ]
 
 [params]
 

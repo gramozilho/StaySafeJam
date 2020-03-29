@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Frog_Anim.png-f9f76e4f106bb089faef2e6a2f80b8ab.stex"
+path="res://.import/ArrowKeys.png-f33462de8fb738209db3b580ac507794.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Frog_Anim.png"
-dest_files=[ "res://.import/Frog_Anim.png-f9f76e4f106bb089faef2e6a2f80b8ab.stex" ]
+source_file="res://Assets/Sprites/ArrowKeys.png"
+dest_files=[ "res://.import/ArrowKeys.png-f33462de8fb738209db3b580ac507794.stex" ]
 
 [params]
 

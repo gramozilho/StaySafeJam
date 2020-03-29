@@ -2,7 +2,7 @@ extends Node
 
 onready var ant_scene : PackedScene = preload("res://Objects/Ant.tscn")
 
-var max_ants := 6
+var max_ants := 20
 
 var amount_of_ants := 0
 
