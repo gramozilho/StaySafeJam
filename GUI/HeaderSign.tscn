@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GUI/tile_sign_skin.tres" type="StyleBox" id=1]
+[ext_resource path="res://Assets/Fonts/BoldFont.tres" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[node name="BaseSign" type="Label"]
+anchor_right = 0.051
+custom_styles/normal = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Header
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
