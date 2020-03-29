@@ -2,15 +2,15 @@
 
 [ext_resource path="res://Objects/Ant.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/Ground.tres" type="TileSet" id=2]
-[ext_resource path="res://Objects/Ant Hive.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/AntEater.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Sprites/BackgroundOutside.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/Hill.png" type="Texture" id=5]
-[ext_resource path="res://Objects/LevelGoal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Ant Hive.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Sprites/Tree 1.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/Bush 1.png" type="Texture" id=8]
-[ext_resource path="res://Objects/Water.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Objects/AntEater.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Objects/Flower.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Objects/Flower.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/Water.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Objects/LevelGoal.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 693, 55.8994 )
@@ -129,10 +129,10 @@ position = Vector2( 2644, 993 )
 scale = Vector2( 8, 8 )
 texture = ExtResource( 8 )
 
-[node name="Ant Hive" parent="." instance=ExtResource( 3 )]
+[node name="Ant Hive" parent="." instance=ExtResource( 6 )]
 position = Vector2( 326, 772 )
 
-[node name="AntEater" parent="." instance=ExtResource( 10 )]
+[node name="AntEater" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1711, 767 )
 
 [node name="TileMap" type="TileMap" parent="." groups=[
@@ -146,23 +146,23 @@ tile_data = PoolIntArray( -1, 1, 0, -65536, 1, 1, -65535, 1, 1, -65534, 1, 1, -6
 
 [node name="Flowers" type="Node" parent="."]
 
-[node name="Flower" parent="Flowers" instance=ExtResource( 11 )]
+[node name="Flower" parent="Flowers" instance=ExtResource( 9 )]
 position = Vector2( 736, 767 )
 
-[node name="Flower2" parent="Flowers" instance=ExtResource( 11 )]
+[node name="Flower2" parent="Flowers" instance=ExtResource( 9 )]
 position = Vector2( 1506, 512 )
 
-[node name="Flower3" parent="Flowers" instance=ExtResource( 11 )]
+[node name="Flower3" parent="Flowers" instance=ExtResource( 9 )]
 position = Vector2( 1633, 831 )
 
-[node name="Flower4" parent="Flowers" instance=ExtResource( 11 )]
+[node name="Flower4" parent="Flowers" instance=ExtResource( 9 )]
 position = Vector2( 2400, 448 )
 
 [node name="Ant" parent="." instance=ExtResource( 1 )]
 position = Vector2( 514, 767 )
 
 [node name="Camera2D" type="Camera2D" parent="Ant"]
-position = Vector2( 0, -3.05176e-05 )
+position = Vector2( 0, -3.05176e-005 )
 current = true
 limit_left = 0
 limit_top = 0
@@ -176,10 +176,10 @@ drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 editor_draw_limits = true
 
-[node name="Candy" parent="." instance=ExtResource( 6 )]
+[node name="Candy" parent="." instance=ExtResource( 11 )]
 position = Vector2( 2881, 358 )
 
-[node name="Water" parent="." instance=ExtResource( 9 )]
+[node name="Water" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1721, 955 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
