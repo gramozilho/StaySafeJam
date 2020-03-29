@@ -80,9 +80,10 @@ func _physics_process(delta : float) -> void:
 	pass
 
 func freeze():
-	$FreezeSound.play()
-	$AnimationPlayer.play("Freeze")
-	state = MOVEMENT_STATES.FROZEN
+	if (state != MOVEMENT_STATES.FROZEN && !is_dead):
+		$FreezeSound.play()
+		$AnimationPlayer.play("Freeze")
+		state = MOVEMENT_STATES.FROZEN
 	pass
 
 func _movement(delta : float) -> void:
