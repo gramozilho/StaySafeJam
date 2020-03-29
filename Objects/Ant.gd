@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Ant
 
-const GRAVITY := 6000.0
+const GRAVITY_SCALE := 6000.0
 const MOVE_SPEED := 25000.0
 const JUMP_HEIGHT := -80000
 const ACCELERATION : = .5
@@ -16,6 +16,7 @@ onready var _animated_sprite := $AnimatedSprite
 
 var _direction := 0
 var _velocity := Vector2()
+var gravity := Vector2(0, 1)
 
 var _is_floorcast_touching := false
 var _is_falling := false
@@ -36,6 +37,7 @@ func _ready() -> void:
 	pass
 
 func die() -> void:
+	visible = false
 	if (!is_dead):
 		$"Death Sound".play()
 		BackgroundMusic.stream_paused = true
@@ -87,10 +89,15 @@ func freeze():
 func _movement(delta : float) -> void:
 	randomize()
 	
+	if (_floor_cast.is_colliding()):
+		gravity = -_floor_cast.get_collision_normal()
+	else:
+		gravity = Vector2(0, 1)
+	
 	var previous_direction := _direction
 	_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	
-	if (_direction != 0):
+	if (_direction != 0 && _is_floorcast_touching):
 		if (!$"Walk Sound".playing):
 			$"Walk Sound".pitch_scale = rand_range(.8, 1.2)
 			$"Walk Sound".play()
@@ -112,14 +119,16 @@ func _movement(delta : float) -> void:
 	
 	if (_direction < 0):
 		_animated_sprite.flip_h = true
-		$CollisionPolygon2D.scale.x = -1
+		$CollisionShape2D.scale.x = -1
+		$FloorCast.cast_to = Vector2(-64, 64)
 		_wall_cast.scale.x = -1
 		if (_animated_sprite.animation != "Slide"):
 			_animated_sprite.play("Walk")
 	elif (_direction > 0):
 		_animated_sprite.flip_h = false
-		$CollisionPolygon2D.scale.x = 1
+		$CollisionShape2D.scale.x = 1
 		_wall_cast.scale.x = 1
+		$FloorCast.cast_to = Vector2(64, 64)
 		if (_animated_sprite.animation != "Slide"):
 			_animated_sprite.play("Walk")
 	else:
@@ -138,13 +147,13 @@ func _movement(delta : float) -> void:
 		_is_floorcast_touching = false
 	
 	if (!is_on_floor()):
-		_velocity.y += GRAVITY
+		_velocity += gravity * GRAVITY_SCALE
 	
 	if (is_on_floor()):
 		_velocity.y = 0
 	
 	if (is_on_ceiling()):
-		_velocity.y = GRAVITY
+		_velocity = gravity * GRAVITY_SCALE
 	
 	if (global_position.y > OS.window_size.y):
 		die()
