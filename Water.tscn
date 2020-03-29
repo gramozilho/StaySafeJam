@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Objects/water.gd" type="Script" id=1]
+
+[node name="Water" type="Area2D"]
+monitorable = false
+collision_layer = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+[connection signal="body_entered" from="." to="." method="_on_Water_body_entered"]
