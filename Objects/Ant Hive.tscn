@@ -1,8 +1,45 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Sprites/Dumb House.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Smoke.png" type="Texture" id=2]
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0.132813, 0.132813, 0.132813, 1, 0.45098, 0.45098, 0.45098, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.106206, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -4.33665, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 32, 32, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 22.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+angular_velocity = 30.0
+orbit_velocity = -0.05
+orbit_velocity_random = 0.0
+angle = 360.0
+angle_random = 1.0
+scale = 2.0
+scale_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
 
 [node name="Ant Hive" type="StaticBody2D"]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( -98, -392 )
+amount = 128
+lifetime = 5.0
+process_material = SubResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 4, 4 )
