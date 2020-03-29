@@ -39,8 +39,13 @@ func _process(delta : float) -> void:
 			lose_screen()
 	
 	# Update GUI
-	$GUI/VBoxContainer/MaximumAntsLabel.text = "Max ants: "+ var2str(AntManager.max_ants)
-	$GUI/VBoxContainer/AntsLabel.text = "Used ants: "+ var2str(AntManager.amount_of_ants)
+	#$GUI/VBoxContainer/MaximumAntsLabel.text = "Max ants: "+ var2str(AntManager.max_ants)
+	#$GUI/VBoxContainer/AntsLabel.text = "Used ants: "+ var2str(AntManager.amount_of_ants)
+	
+	#$GUI/BaseSign.text = '     ' + var2str(AntManager.amount_of_ants) + '/' + var2str(AntManager.max_ants)
+	
+	$GUI/BaseSign/HBoxContainer/MaximumAntsLabel.text = var2str(AntManager.max_ants)
+	$GUI/BaseSign/HBoxContainer/AntsLabel.text = var2str(AntManager.amount_of_ants)
 	pass
 
 func menu_transition(turn_on) -> void:

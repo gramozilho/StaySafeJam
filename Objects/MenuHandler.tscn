@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Sprites/white_square.png" type="Texture" id=1]
 [ext_resource path="res://Objects/MenuHandler.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Assets/HUD/HUD_Ropes.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Shaders/SimpleTransition.tres" type="Material" id=6]
 [ext_resource path="res://GUI/SimpleButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Fonts/AntHUD.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Assets/Sprites/Ant_HUD.png" type="Texture" id=9]
 
 [node name="MenuHandler" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -57,6 +59,8 @@ margin_bottom = 110.0
 text = "Back to menu"
 
 [node name="GUI" type="Control" parent="."]
+margin_left = 60.0
+margin_top = 40.0
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -78,6 +82,58 @@ margin_bottom = 14.0
 margin_top = 18.0
 margin_right = 40.0
 margin_bottom = 32.0
+
+[node name="BaseSign" parent="GUI" instance=ExtResource( 4 )]
+margin_right = 146.917
+margin_bottom = 61.163
+text = "           
+ "
+
+[node name="Sprite" type="Sprite" parent="GUI/BaseSign"]
+position = Vector2( 39.4709, 32.6768 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 9 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/BaseSign"]
+margin_left = 82.488
+margin_top = 12.6178
+margin_right = 122.488
+margin_bottom = 52.6178
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AntsLabel" type="Label" parent="GUI/BaseSign/HBoxContainer"]
+margin_top = 11.0
+margin_right = 9.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 8 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slash" type="Label" parent="GUI/BaseSign/HBoxContainer"]
+margin_left = 13.0
+margin_top = 11.0
+margin_right = 22.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 8 )
+text = "/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MaximumAntsLabel" type="Label" parent="GUI/BaseSign/HBoxContainer"]
+margin_left = 26.0
+margin_top = 11.0
+margin_right = 35.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 8 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="."]
 
