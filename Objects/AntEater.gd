@@ -8,7 +8,6 @@ func _ready():
 func _on_AntEater_body_entered(body) -> void:
 	if body.is_in_group('ant'):
 		var path = [Vector2(0, 8), (body.get_global_position() - self.get_global_position() )]
-		print(path)
 		for i in path:
 			$Line2D.add_point(i)
 		$Line2D.show()

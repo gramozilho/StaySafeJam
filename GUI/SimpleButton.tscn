@@ -1,17 +1,64 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GUI/simple_sign_skin.tres" type="StyleBox" id=1]
 [ext_resource path="res://Assets/Fonts/NormalFont.tres" type="DynamicFontData" id=2]
 [ext_resource path="res://GUI/SimpleButton.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Sounds/ButtonHover.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Bob"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Press"
+length = 0.25
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.75, 0.75 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1.5, 1.5, 1.5, 1 ), Color( 2, 2, 2, 1 ), Color( 1.5, 1.5, 1.5, 1 ) ]
+}
 
 [node name="BaseButton" type="Button"]
 anchor_right = 0.077
 margin_right = -97.84
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
+rect_pivot_offset = Vector2( 50, 30 )
 custom_styles/hover = ExtResource( 1 )
 custom_styles/pressed = ExtResource( 1 )
 custom_styles/focus = ExtResource( 1 )
@@ -23,5 +70,15 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Bob = SubResource( 2 )
+anims/Press = SubResource( 3 )
+
+[node name="HoverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -20.0
 [connection signal="mouse_entered" from="." to="." method="_on_BaseButton_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_BaseButton_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_BaseButton_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
