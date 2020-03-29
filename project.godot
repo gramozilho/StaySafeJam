@@ -30,7 +30,7 @@ config/name="Antlings"
 run/main_scene="res://Scenes/TitleMenu.tscn"
 boot_splash/image="res://Assets/HUD/splash1.png"
 boot_splash/use_filter=false
-config/icon="res://Assets/Sprites/Dumb placeholder ant.png"
+config/icon="res://Assets/Sprites/Ant_Icon.png"
 
 [autoload]
 

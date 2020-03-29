@@ -20,6 +20,7 @@ const GAME_MENU_OFF_X := 1950
 func _ready() -> void:
 	reset_menus()
 	update_current_scene()
+	$GUI.visible = false
 
 
 func update_current_scene():
@@ -56,12 +57,12 @@ func reset_menus() -> void:
 	menu_on = false
 	$GameMenu.position.x = GAME_MENU_OFF_X
 	$EndScreen.visible = false
-	if path_levels[current_level] == path_endscreen:
-		$GUI.visible = false
-		can_open_menu = false
-	else:
-		$GUI.visible = true
-		can_open_menu = true
+	#if path_levels[current_level] in [path_endscreen, path_titlescreen]:
+	$GUI.visible = true
+	can_open_menu = true
+	#else:
+	#	#$GUI.visible = true
+	#	can_open_menu = true
 	
 
 func _on_Restart_pressed() -> void:
@@ -71,7 +72,7 @@ func _on_Restart_pressed() -> void:
 
 func _on_BackToMenu_pressed() -> void:
 	goto_scene(path_titlescreen)
-	$GUI.visible = false
+	#$GUI.visible = false
 	can_open_menu = false
 
 func goto_scene(path) -> void:
@@ -79,8 +80,9 @@ func goto_scene(path) -> void:
 	AntManager.amount_of_ants = 1
 	reset_menus()
 	$GameMenu/VBoxContainer/BaseSign.text = "Level " + String(current_level+1)  #current_scene.name
-	if path == path_titlescreen:
+	if path in [path_endscreen, path_titlescreen]:  # == path_titlescreen:
 		$GUI.visible = false
+		can_open_menu = false
 
 func _deferred_goto_scene(path) -> void:
 	transition_on(true)
