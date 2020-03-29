@@ -111,9 +111,9 @@ __meta__ = {
 }
 
 [node name="AntsLabel" type="Label" parent="GUI/BaseSign/HBoxContainer"]
-margin_top = 11.0
-margin_right = 9.0
-margin_bottom = 29.0
+margin_top = 17.0
+margin_right = 3.0
+margin_bottom = 23.0
 custom_fonts/font = ExtResource( 8 )
 text = "1"
 __meta__ = {
@@ -121,10 +121,10 @@ __meta__ = {
 }
 
 [node name="Slash" type="Label" parent="GUI/BaseSign/HBoxContainer"]
-margin_left = 13.0
-margin_top = 11.0
-margin_right = 22.0
-margin_bottom = 29.0
+margin_left = 7.0
+margin_top = 17.0
+margin_right = 11.0
+margin_bottom = 23.0
 custom_fonts/font = ExtResource( 8 )
 text = "/"
 __meta__ = {
@@ -132,10 +132,10 @@ __meta__ = {
 }
 
 [node name="MaximumAntsLabel" type="Label" parent="GUI/BaseSign/HBoxContainer"]
-margin_left = 26.0
-margin_top = 11.0
-margin_right = 35.0
-margin_bottom = 29.0
+margin_left = 15.0
+margin_top = 17.0
+margin_right = 18.0
+margin_bottom = 23.0
 custom_fonts/font = ExtResource( 8 )
 text = "1"
 __meta__ = {
