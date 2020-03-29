@@ -1,9 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://GUI/SimpleButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/HUD/1.png" type="Texture" id=2]
-[ext_resource path="res://Assets/HUD/WinScreen.png" type="Texture" id=3]
-[ext_resource path="res://Assets/HUD/background1.png" type="Texture" id=4]
 [ext_resource path="res://Assets/HUD/2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/HUD/HUD_BG_Side.png" type="Texture" id=6]
 [ext_resource path="res://GUI/CutscenePlayer.gd" type="Script" id=7]
@@ -19,18 +17,6 @@ script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="background1" type="Sprite" parent="."]
-visible = false
-position = Vector2( 938.149, 552.731 )
-scale = Vector2( 2.80799, 2.92657 )
-texture = ExtResource( 4 )
-
-[node name="WinScreen" type="Sprite" parent="."]
-visible = false
-position = Vector2( 1064.81, -449.701 )
-scale = Vector2( 11.8327, 11.8327 )
-texture = ExtResource( 3 )
 
 [node name="HUD_BG_Side" type="Sprite" parent="."]
 position = Vector2( 831.72, -353.408 )

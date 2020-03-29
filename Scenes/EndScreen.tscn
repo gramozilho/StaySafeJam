@@ -1,10 +1,39 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scenes/TitleMenu.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/EndScreen.gd" type="Script" id=1]
 [ext_resource path="res://Assets/HUD/background1.png" type="Texture" id=2]
 [ext_resource path="res://GUI/SimpleButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/HUD/7.png" type="Texture" id=4]
 [ext_resource path="res://Assets/HUD/SPLASH_transparent.png" type="Texture" id=6]
 [ext_resource path="res://Assets/HUD/WinScreen.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fall"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ), Vector2( 0, 1000 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 10.0 ]
+}
 
 [node name="EndMenu" type="Control"]
 anchor_right = 1.0
@@ -20,6 +49,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 347, 195 )
 
 [node name="Tree" type="Sprite" parent="."]
+position = Vector2( -46, 0 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 7 )
 offset = Vector2( 250, 135 )
@@ -29,18 +59,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -406.162
-margin_top = 260.0
-margin_right = -133.162
-margin_bottom = 380.0
+margin_left = -225.56
+margin_top = 264.52
+margin_right = -68.5597
+margin_bottom = 328.52
 rect_scale = Vector2( 3, 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Next" parent="VBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_right = 157.0
+text = "Next"
+
 [node name="Back" parent="VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
-margin_right = 273.0
+margin_top = 34.0
+margin_right = 157.096
+margin_bottom = 64.0
 text = "Back to menu"
 
 [node name="CheerfulTune" type="AudioStreamPlayer" parent="."]
@@ -52,4 +89,30 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 73.8477, -8.38227, 130.257, 111.324 )
+
+[node name="Cutscene" type="Control" parent="."]
+margin_top = -2.0
+margin_right = 40.0
+margin_bottom = 37.9999
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" parent="Cutscene" instance=ExtResource( 3 )]
+margin_left = 403.12
+margin_top = 45.1991
+margin_right = 459.137
+margin_bottom = 75.1991
+rect_scale = Vector2( 18.6928, 23.0738 )
+disabled = true
+text = "    "
+
+[node name="Sprite" type="Sprite" parent="Cutscene"]
+position = Vector2( 948.1, 394.753 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscene"]
+anims/fall = SubResource( 1 )
+[connection signal="pressed" from="VBoxContainer/Next" to="." method="_on_Next_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
