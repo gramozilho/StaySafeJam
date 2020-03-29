@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Sprites/Tileset.png" type="Texture" id=1]
 [ext_resource path="res://Objects/LevelGoal.gd" type="Script" id=2]
@@ -7,6 +7,35 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 37.9253
 
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.2, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -5 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, 4 ), Vector2( 4.2, 3.8 ), Vector2( 4, 4 ) ]
+}
+
 [node name="Candy" type="Area2D"]
 script = ExtResource( 2 )
 
@@ -14,7 +43,8 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 4, 4 )
+position = Vector2( 0, -0.586747 )
+scale = Vector2( 4.02347, 3.97653 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 15, 19, 18, 11 )
@@ -22,4 +52,7 @@ region_rect = Rect2( 15, 19, 18, 11 )
 [node name="Pickup Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 volume_db = -5.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 2 )
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]

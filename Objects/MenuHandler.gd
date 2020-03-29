@@ -8,8 +8,9 @@ var current_level := 0
 var path_titlescreen := "res://Scenes/TitleMenu.tscn"
 var path_lvl1 := "res://Scenes/Level 1.tscn"
 var path_lvl2 := "res://Scenes/Level 2.tscn"
+var path_lvl3 := "res://Scenes/Level 3.tscn"
 var path_endscreen := "res://Scenes/EndScreen.tscn"
-var path_levels := [path_lvl1, path_lvl2, path_endscreen]
+var path_levels := [path_lvl1, path_lvl2, path_lvl3, path_endscreen]
 
 const MSG_LEVEL_COMPLETED := "Level completed!"
 const MSG_LEVEL_FAILED := "Level failed :("
