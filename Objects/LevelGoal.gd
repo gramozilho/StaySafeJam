@@ -12,5 +12,6 @@ func _on_Area2D_body_entered(body):
 		if (!_picked_up):
 			_picked_up = true
 			$"Pickup Sound".play()
+			visible = false
 			MenuHandler.win_screen()
 	pass

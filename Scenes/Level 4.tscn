@@ -188,5 +188,11 @@ position = Vector2( 1239.86, 890.561 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
 shape = SubResource( 1 )
 
+[node name="Water2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 2892, 852 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water2"]
+shape = SubResource( 1 )
+
 [node name="Spawn Point" type="Position2D" parent="."]
 position = Vector2( 512, 512 )
