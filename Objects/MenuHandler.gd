@@ -26,6 +26,8 @@ func update_current_scene():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 
+	$Transition.get_material().set_shader_param("cutoff", 1.0)
+	
 func _process(delta : float) -> void:
 	# keeping the menu handling here for now to keep my work on separate scenes
 	if can_open_menu:
@@ -54,8 +56,12 @@ func reset_menus() -> void:
 	menu_on = false
 	$GameMenu.position.x = GAME_MENU_OFF_X
 	$EndScreen.visible = false
-	$GUI.visible = true
-	can_open_menu = true
+	if path_levels[current_level] == path_endscreen:
+		$GUI.visible = false
+		can_open_menu = false
+	else:
+		$GUI.visible = true
+		can_open_menu = true
 	
 
 func _on_Restart_pressed() -> void:
@@ -65,35 +71,61 @@ func _on_Restart_pressed() -> void:
 
 func _on_BackToMenu_pressed() -> void:
 	goto_scene(path_titlescreen)
+	$GUI.visible = false
+	can_open_menu = false
 
 func goto_scene(path) -> void:
 	call_deferred("_deferred_goto_scene", path)
 	AntManager.amount_of_ants = 1
 	reset_menus()
+	$GameMenu/VBoxContainer/BaseSign.text = "Level " + String(current_level+1)  #current_scene.name
 	if path == path_titlescreen:
 		$GUI.visible = false
 
 func _deferred_goto_scene(path) -> void:
+	transition_on(true)
+	$Timer.start()
+	yield($Timer, "timeout")
 	current_scene.call_deferred("free")
 	var s = ResourceLoader.load(path)
 	current_scene = s.instance()
 	get_tree().get_root().add_child(current_scene)
+	transition_on(false)
 	pass
 
 func win_screen() -> void:
-	self.menu_on = false
-	can_open_menu = false
-	$EndScreen/VBoxContainer/EndMessage.text = MSG_LEVEL_COMPLETED
-	$EndScreen/VBoxContainer/Next.visible = true
-	$EndScreen.visible = true
+	end_level_screen(true)
+	#self.menu_on = false
+	#can_open_menu = false
+	#$EndScreen/VBoxContainer/EndMessage.text = MSG_LEVEL_COMPLETED
+	#$EndScreen/VBoxContainer/Next.visible = true
+	#$EndScreen.visible = true
 
 func lose_screen() -> void:
+	end_level_screen(false)
+	#self.menu_on = false
+	#can_open_menu = false
+	#$EndScreen/VBoxContainer/EndMessage.text = MSG_LEVEL_FAILED
+	#$EndScreen/VBoxContainer/Next.visible = false
+	#$EndScreen.visible = true
+
+func end_level_screen(win) -> void:
 	self.menu_on = false
 	can_open_menu = false
-	$EndScreen/VBoxContainer/EndMessage.text = MSG_LEVEL_FAILED
-	$EndScreen/VBoxContainer/Next.visible = false
-	$EndScreen.visible = true
+	if win:
+		$EndScreen/VBoxContainer/EndMessage.text = MSG_LEVEL_COMPLETED
+	else:
+		$EndScreen/VBoxContainer/EndMessage.text = MSG_LEVEL_FAILED
+	$EndScreen/VBoxContainer/Next.visible = win
 	
+	$EndScreen.visible = true
+
+func transition_on(turn_on) -> void:
+	if turn_on:
+		$TweenTransition.interpolate_property($Transition.get_material(), "shader_param/cutoff", 1.0, 0.0, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	else:
+		$TweenTransition.interpolate_property($Transition.get_material(), "shader_param/cutoff", 0.0, 1.0, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$TweenTransition.start()
 
 func _on_Next_pressed() -> void:
 	#current_level = (current_level + 1) % len(path_levels)
