@@ -23,6 +23,6 @@ func add_ant(sender = null, camera : Camera2D = null, position := Vector2()) -> 
 		if (camera != null):
 			ant_instance.call_deferred("add_child", camera)
 			var sender_node = sender as Node2D
-	elif (amount_of_ants == max_ants):
-		MenuHandler.lose_screen()
+	#elif (amount_of_ants == max_ants):
+	#	MenuHandler.lose_screen()
 	pass

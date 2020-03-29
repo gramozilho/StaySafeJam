@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Death Sound.wav-7d1763844312d6aa3ff27aada1f94c78.sample"
+path="res://.import/Ant Freeze.wav-932f13ade74d20398a6c5184a2cf76b8.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/Death Sound.wav"
-dest_files=[ "res://.import/Death Sound.wav-7d1763844312d6aa3ff27aada1f94c78.sample" ]
+source_file="res://Assets/Sounds/Ant Freeze.wav"
+dest_files=[ "res://.import/Ant Freeze.wav-932f13ade74d20398a6c5184a2cf76b8.sample" ]
 
 [params]
 
