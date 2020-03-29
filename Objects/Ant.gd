@@ -46,14 +46,7 @@ func _physics_process(delta : float) -> void:
 	match (state):
 		MOVEMENT_STATES.NORMAL:
 			if (Input.is_action_just_pressed("freeze_ant") && _is_floorcast_touching):  # && AntManager.amount_of_ants < AntManager.max_ants):
-				state = MOVEMENT_STATES.FROZEN
-				$AnimatedSprite.modulate = Color(1.0, 1.0, 4.0)
-				
-				var camera : Camera2D = get_node("Camera2D")
-				if (is_instance_valid(camera)):
-					remove_child(camera)
-				
-				AntManager.add_ant(self, camera, Vector2(512, 512))
+				freeze()
 			
 			_movement(delta)
 			
@@ -78,6 +71,19 @@ func _physics_process(delta : float) -> void:
 			pass
 	pass
 
+func freeze():
+	$FreezeSound.play()
+	$AnimationPlayer.play("Freeze")
+	state = MOVEMENT_STATES.FROZEN
+	
+	var camera : Camera2D = get_node("Camera2D")
+	
+	if (is_instance_valid(camera)):
+		remove_child(camera)
+	
+	AntManager.add_ant(self, camera, Vector2(512, 512))
+	pass
+
 func _movement(delta : float) -> void:
 	randomize()
 	
@@ -93,8 +99,8 @@ func _movement(delta : float) -> void:
 	
 	_velocity.x = lerp(_velocity.x, _direction * MOVE_SPEED, ACCELERATION)
 	
-	if (Input.is_action_just_pressed("move_dash") && _direction != 0 && _is_floorcast_touching):
-		_velocity.x += (_direction * MOVE_SPEED * 10)
+	#if (Input.is_action_just_pressed("move_dash") && _direction != 0 && _is_floorcast_touching):
+		#_velocity.x += (_direction * MOVE_SPEED * 10)
 	
 	if (_wall_cast.is_colliding() && _direction != 0):
 		var collider = _wall_cast.get_collider()

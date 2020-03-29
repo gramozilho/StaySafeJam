@@ -1,10 +1,14 @@
-[gd_scene load_steps=20 format=2]
+
+[gd_scene load_steps=21 format=2]
+
 
 [ext_resource path="res://Assets/Sprites/Ant_Spritesheet_32x16.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Ant.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sounds/Ant Walk.wav" type="AudioStream" id=3]
 [ext_resource path="res://Assets/Sounds/Death Sound.wav" type="AudioStream" id=4]
-[ext_resource path="res://Assets/Sounds/Jump.wav" type="AudioStream" id=5]
+
+[ext_resource path="res://Assets/Sounds/Ant Freeze.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Sounds/Jump.wav" type="AudioStream" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -67,6 +71,34 @@ animations = [ {
 "speed": 24.0
 } ]
 
+[sub_resource type="Animation" id=15]
+resource_name = "Freeze"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 6.0, 0.0, -6.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 2, 10, 1 ) ]
+}
+
 [sub_resource type="Animation" id=14]
 length = 0.5
 step = 0.05
@@ -89,6 +121,15 @@ tracks/0/keys = {
 ]]
 script = ExtResource( 2 )
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 0, -32 )
+polygon = PoolVector2Array( 35, -24, 13, -7, -4, -4, -45, 4, -56, 32, -28, 32, 30, 32, 51, 12, 52, -8.99999 )
+
+[node name="FreezeSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -15.0
+
 [node name="Death Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 volume_db = -15.0
@@ -105,12 +146,14 @@ animation = "Walk"
 offset = Vector2( 0, -8 )
 
 [node name="FloorCast" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 0, -32 )
 enabled = true
 cast_to = Vector2( 0, 64 )
 
 [node name="WallCast" type="RayCast2D" parent="."]
-position = Vector2( 0, -20 )
+visible = false
+position = Vector2( 0, -10 )
 enabled = true
 cast_to = Vector2( 72, 0 )
 
@@ -122,16 +165,15 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( 0, -32 )
-polygon = PoolVector2Array( 35, -24, 13, -7, -4, -4, -45, 4, -56, 32, -28, 32, 30, 32, 51, 12, 52, -8.99999 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
+
 anims/Jump = SubResource( 14 )
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 volume_db = -15.0
+
+anims/Freeze = SubResource( 15 )
 [connection signal="finished" from="Death Sound" to="." method="_on_Death_Sound_finished"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
