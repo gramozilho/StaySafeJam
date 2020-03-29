@@ -77,20 +77,13 @@ func freeze():
 	$FreezeSound.play()
 	$AnimationPlayer.play("Freeze")
 	state = MOVEMENT_STATES.FROZEN
-	
-	var camera : Camera2D = get_node("Camera2D")
-	
-	if (is_instance_valid(camera)):
-		remove_child(camera)
-	
-	AntManager.add_ant(self, camera, Vector2(512, 512))
 	pass
 
 func _movement(delta : float) -> void:
 	randomize()
 	
-	if (_floor_cast.is_colliding()):
-		gravity = -_floor_cast.get_collision_normal()
+	if (_floor_cast.is_colliding() && _floor_cast.get_collision_normal().x == 0):
+			gravity = -_floor_cast.get_collision_normal()
 	else:
 		gravity = Vector2(0, 1)
 	
@@ -120,7 +113,7 @@ func _movement(delta : float) -> void:
 	if (_direction < 0):
 		_animated_sprite.flip_h = true
 		$CollisionShape2D.scale.x = -1
-		$FloorCast.cast_to = Vector2(-64, 64)
+		$FloorCast.cast_to = Vector2(-48, 64)
 		_wall_cast.scale.x = -1
 		if (_animated_sprite.animation != "Slide"):
 			_animated_sprite.play("Walk")
@@ -128,7 +121,7 @@ func _movement(delta : float) -> void:
 		_animated_sprite.flip_h = false
 		$CollisionShape2D.scale.x = 1
 		_wall_cast.scale.x = 1
-		$FloorCast.cast_to = Vector2(64, 64)
+		$FloorCast.cast_to = Vector2(48, 64)
 		if (_animated_sprite.animation != "Slide"):
 			_animated_sprite.play("Walk")
 	else:
@@ -182,4 +175,14 @@ func _on_Death_Sound_finished():
 	AntManager.add_ant(self, camera, Vector2(512, 512))
 	call_deferred("free")
 	BackgroundMusic.stream_paused = false
+	pass
+
+func _on_AnimationPlayer_animation_finished(anim_name : String) -> void:
+	if (anim_name == "Freeze"):
+		var camera : Camera2D = get_node("Camera2D")
+		
+		if (is_instance_valid(camera)):
+			remove_child(camera)
+		
+		AntManager.add_ant(self, camera, Vector2(512, 512))
 	pass
