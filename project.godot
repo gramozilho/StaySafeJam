@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Ant",
 "language": "GDScript",
 "path": "res://Objects/Ant.gd"
+}, {
+"base": "Area2D",
+"class": "AntEater",
+"language": "GDScript",
+"path": "res://Objects/AntEater.gd"
 } ]
 _global_script_class_icons={
-"Ant": ""
+"Ant": "",
+"AntEater": ""
 }
 
 [application]
@@ -23,7 +29,8 @@ _global_script_class_icons={
 config/name="Antlings"
 run/main_scene="res://Scenes/TitleMenu.tscn"
 boot_splash/image="res://Assets/HUD/splash1.png"
-config/icon="res://Assets/Sprites/icon.png"
+boot_splash/use_filter=false
+config/icon="res://Assets/Sprites/Dumb placeholder ant.png"
 
 [autoload]
 
@@ -31,6 +38,7 @@ Shortcuts="*res://Globals/Shortcuts.gd"
 AntManager="*res://Globals/AntManager.tscn"
 MenuHandler="*res://Objects/MenuHandler.tscn"
 PostProcessingEffects="*res://Objects/Post Processing Effects.tscn"
+BackgroundMusic="*res://Globals/BackgroundMusic.tscn"
 
 [display]
 

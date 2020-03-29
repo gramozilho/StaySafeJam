@@ -1,15 +1,29 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Objects/Ant.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/Ground.tres" type="TileSet" id=2]
 [ext_resource path="res://Objects/Ant Hive.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Sprites/BackgroundOutside.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/Hill.png" type="Texture" id=5]
-[ext_resource path="res://Objects/LevelGoal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/AntEater.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Sprites/Tree 1.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/Bush 1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/Flower.png" type="Texture" id=9]
+[ext_resource path="res://Objects/LevelGoal.tscn" type="PackedScene" id=10]
 
 [node name="Level 1" type="Node2D"]
+
+[node name="AntEater" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2394, -118 )
+
+[node name="Flowers" type="Node" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Flowers"]
+position = Vector2( 1072, 354 )
+rotation = -0.144707
+scale = Vector2( 4, 4 )
+z_index = -1
+texture = ExtResource( 9 )
 
 [node name="Trees" type="Node" parent="."]
 
@@ -126,7 +140,9 @@ texture = ExtResource( 8 )
 [node name="Ant Hive" parent="." instance=ExtResource( 3 )]
 position = Vector2( 320, 512 )
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=[
+"Walkable",
+]]
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
@@ -153,3 +169,6 @@ editor_draw_limits = true
 
 [node name="Area2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2563.79, 452.241 )
+
+[node name="Area2D2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 2791.53, 432.72 )

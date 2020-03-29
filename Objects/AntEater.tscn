@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Sprites/Dumb Tongue.png" type="Texture" id=1]
+[ext_resource path="res://Objects/AntEater.gd" type="Script" id=2]
+
+[node name="AntEater" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 4, 4 )
+polygon = PoolVector2Array( -16, 0, -15, 9, -13, 25, -10, 88, -9, 115, -5, 120, 3, 120, 10, 115, 10, 100, 10, 60, 10, 32, 10, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, 64 )
+[connection signal="body_entered" from="." to="." method="_on_AntEater_body_entered"]
