@@ -38,7 +38,7 @@ func die() -> void:
 	if (is_instance_valid(camera)):
 		remove_child(camera)
 	
-	AntManager.add_ant(self, camera, Vector2(512, 496))
+	AntManager.add_ant(self, camera, Vector2(512, 512))
 	call_deferred("free")
 	pass
 
@@ -53,7 +53,7 @@ func _physics_process(delta : float) -> void:
 				if (is_instance_valid(camera)):
 					remove_child(camera)
 				
-				AntManager.add_ant(self, camera, Vector2(512, 496))
+				AntManager.add_ant(self, camera, Vector2(512, 512))
 			
 			_movement(delta)
 			
@@ -110,7 +110,10 @@ func _movement(delta : float) -> void:
 			_animated_sprite.animation = "Walk"
 			_animated_sprite.frame = 0
 	
-	if (_floor_cast.is_colliding() || is_on_floor()):
+	if (_floor_cast.is_colliding()):
+		if (_floor_cast.get_collider().is_in_group("Walkable")):
+			_is_floorcast_touching = true
+	elif (is_on_floor()):
 		_is_floorcast_touching = true
 	else:
 		_is_floorcast_touching = false
