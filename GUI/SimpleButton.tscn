@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GUI/simple_sign_skin.tres" type="StyleBox" id=1]
+[ext_resource path="res://Assets/Fonts/NormalFont.tres" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[node name="BaseButton" type="Button"]
+anchor_right = 0.077
+margin_right = -97.84
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 1 )
+custom_styles/normal = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
+text = "aa"
+__meta__ = {
+"_edit_use_anchors_": false
+}

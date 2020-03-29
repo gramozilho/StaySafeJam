@@ -73,6 +73,7 @@ func goto_scene(path) -> void:
 	call_deferred("_deferred_goto_scene", path)
 	AntManager.amount_of_ants = 1
 	reset_menus()
+	$GameMenu/VBoxContainer/BaseSign.text = "Level " + String(current_level+1)  #current_scene.name
 	if path == path_titlescreen:
 		$GUI.visible = false
 

@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/TitleMenu.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/white_square.png" type="Texture" id=2]
+[ext_resource path="res://Assets/HUD/background1.png" type="Texture" id=2]
+[ext_resource path="res://GUI/SimpleButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GUI/simple_sign_skin.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets/Fonts/BoldFont.tres" type="DynamicFontData" id=5]
+[ext_resource path="res://Assets/HUD/SPLASH_transparent.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 5 )
 
 [node name="EndMenu" type="Control"]
 anchor_right = 1.0
@@ -12,40 +19,49 @@ __meta__ = {
 }
 
 [node name="Bg" type="Sprite" parent="."]
-modulate = Color( 0.454902, 0.670588, 0.392157, 0.521569 )
-scale = Vector2( 29.913, 16.8217 )
+position = Vector2( 961.301, 546.385 )
+scale = Vector2( 2.8, 2.8 )
 texture = ExtResource( 2 )
-offset = Vector2( 32, 32 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -194.773
-margin_top = -103.386
-margin_right = -72.773
-margin_bottom = -15.3856
-rect_scale = Vector2( 2.39645, 2.53504 )
+margin_left = -406.162
+margin_top = -153.193
+margin_right = -133.162
+margin_bottom = -33.193
+rect_scale = Vector2( 3, 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="VBoxContainer"]
-margin_right = 122.0
-margin_bottom = 48.0
-text = "Well done you magnificent beast, you did it."
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = -1.0
+margin_right = 273.096
+margin_bottom = 85.1397
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 1 )
+text = "You did it, you
+magnificent beast.
+
+Thank you for playing!"
 align = 1
-autowrap = true
 
-[node name="Back" type="Button" parent="VBoxContainer"]
-margin_top = 52.0
-margin_right = 122.0
-margin_bottom = 72.0
+[node name="Back" parent="VBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 90.0
+margin_right = 273.0
+margin_bottom = 120.0
 text = "Back to menu"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CheerfulTune" type="AudioStreamPlayer" parent="."]
+
+[node name="SPLASH_transparent" type="Sprite" parent="."]
+position = Vector2( 1266.63, 275.409 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 73.8477, -8.38227, 130.257, 111.324 )
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
