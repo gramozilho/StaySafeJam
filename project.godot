@@ -29,6 +29,7 @@ config/icon="res://Assets/Sprites/icon.png"
 Shortcuts="*res://Globals/Shortcuts.gd"
 AntManager="*res://Globals/AntManager.tscn"
 MenuHandler="*res://Objects/MenuHandler.tscn"
+PostProcessingEffects="*res://Objects/Post Processing Effects.tscn"
 
 [display]
 
@@ -93,9 +94,14 @@ trigger_lose={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"unicode":0,"echo":false,"script":null)
  ]
 }
+move_flying_ant={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 
 [rendering]
 
 quality/2d/use_pixel_snap=true
-environment/default_clear_color=Color( 0.270588, 0.172549, 0.152941, 1 )
+environment/default_clear_color=Color( 0.286275, 0.447059, 0.654902, 1 )
 environment/default_environment="res://Enviroments/default_env.tres"

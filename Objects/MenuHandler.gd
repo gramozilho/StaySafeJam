@@ -25,7 +25,6 @@ func _ready() -> void:
 func update_current_scene():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
-	print("current_scene: ", current_scene)
 
 	$Transition.get_material().set_shader_param("cutoff", 1.0)
 	
@@ -70,12 +69,10 @@ func _on_Restart_pressed() -> void:
 	goto_scene(path_levels[current_level])
 	#goto_scene(path_levels[current_level])
 
-
 func _on_BackToMenu_pressed() -> void:
 	goto_scene(path_titlescreen)
 	$GUI.visible = false
 	can_open_menu = false
-
 
 func goto_scene(path) -> void:
 	call_deferred("_deferred_goto_scene", path)
@@ -94,6 +91,7 @@ func _deferred_goto_scene(path) -> void:
 	current_scene = s.instance()
 	get_tree().get_root().add_child(current_scene)
 	transition_on(false)
+	pass
 
 func win_screen() -> void:
 	end_level_screen(true)

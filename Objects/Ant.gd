@@ -54,6 +54,7 @@ func _physics_process(delta : float) -> void:
 					remove_child(camera)
 				
 				AntManager.add_ant(self, camera, Vector2(512, 496))
+			
 			_movement(delta)
 			
 			if (!_is_floorcast_touching):
@@ -69,13 +70,11 @@ func _physics_process(delta : float) -> void:
 					_velocity.y = JUMP_HEIGHT
 					_has_jumped = true
 					$AnimationPlayer.play("Jump")
-			move_and_slide(_velocity * delta, _floor_cast.get_collision_normal())
+			move_and_slide_with_snap(_velocity * delta, -_floor_cast.get_collision_normal(), _floor_cast.get_collision_normal(), true)
 		MOVEMENT_STATES.FROZEN:
 			_animated_sprite.stop()
 			_animated_sprite.animation = "Walk"
 			_animated_sprite.frame = 0
-			pass
-		MOVEMENT_STATES.DEAD:
 			pass
 	pass
 
