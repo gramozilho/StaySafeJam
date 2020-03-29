@@ -217,12 +217,12 @@ position = Vector2( 0, 500 )
 
 [node name="OpenSound1" type="AudioStreamPlayer2D" parent="LeftSide"]
 stream = ExtResource( 10 )
-volume_db = -5.0
+volume_db = -10.0
 attenuation = 0.392292
 
 [node name="CloseSound1" type="AudioStreamPlayer2D" parent="LeftSide"]
 stream = ExtResource( 11 )
-volume_db = -5.0
+volume_db = -10.0
 attenuation = 0.329877
 
 [node name="RightSide" type="Node2D" parent="."]
@@ -230,12 +230,12 @@ position = Vector2( 1920, 500 )
 
 [node name="OpenSound2" type="AudioStreamPlayer2D" parent="RightSide"]
 stream = ExtResource( 10 )
-volume_db = -5.0
+volume_db = -10.0
 attenuation = 0.392292
 
 [node name="CloseSound2" type="AudioStreamPlayer2D" parent="RightSide"]
 stream = ExtResource( 11 )
-volume_db = -5.0
+volume_db = -10.0
 attenuation = 0.329877
 
 [node name="Button" type="AudioStreamPlayer2D" parent="."]
