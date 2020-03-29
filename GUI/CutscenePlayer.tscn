@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://GUI/SimpleButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/HUD/1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sounds/ButtonPress.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sounds/CutScene.wav" type="AudioStream" id=4]
 [ext_resource path="res://Assets/HUD/2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/HUD/HUD_BG_Side.png" type="Texture" id=6]
 [ext_resource path="res://GUI/CutscenePlayer.gd" type="Script" id=7]
@@ -9,6 +11,7 @@
 [ext_resource path="res://Assets/HUD/4.png" type="Texture" id=9]
 [ext_resource path="res://Assets/HUD/5.png" type="Texture" id=10]
 [ext_resource path="res://Assets/HUD/6.png" type="Texture" id=11]
+[ext_resource path="res://Assets/HUD/Frame.png" type="Texture" id=12]
 
 [node name="CutscenePlayer" type="Control"]
 anchor_right = 1.0
@@ -23,22 +26,13 @@ position = Vector2( 831.72, -353.408 )
 scale = Vector2( 15.6513, 11.363 )
 texture = ExtResource( 6 )
 
-[node name="Frame" parent="." instance=ExtResource( 1 )]
-margin_left = 264.0
-margin_top = 136.0
-margin_right = 166.16
-margin_bottom = 166.0
-rect_scale = Vector2( 25.5293, 25.349 )
-disabled = true
-
 [node name="Screen" type="Control" parent="."]
-margin_left = 320.0
-margin_top = 192.0
-margin_right = 360.0
-margin_bottom = 232.0
+margin_left = 322.0
+margin_top = 136.0
+margin_right = 362.0
+margin_bottom = 176.0
 rect_scale = Vector2( 1.2123, 1.20188 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -71,6 +65,11 @@ offset = Vector2( 120, 68 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 11 )
 offset = Vector2( 120, 68 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 890, 480 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 12 )
 
 [node name="UI" type="Control" parent="."]
 margin_right = 40.0
@@ -110,5 +109,19 @@ margin_bottom = 40.0
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
+
+[node name="Previous" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 472, 976 )
+stream = ExtResource( 3 )
+volume_db = -15.0
+pitch_scale = 0.6
+
+[node name="Next" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 1304, 976 )
+stream = ExtResource( 4 )
+volume_db = -15.0
+
+[node name="Celebration" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 920, 568 )
 [connection signal="pressed" from="UI/HBoxContainer/Previous" to="." method="_on_Previous_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/Next" to="." method="_on_Next_pressed"]

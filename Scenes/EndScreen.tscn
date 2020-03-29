@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/EndScreen.gd" type="Script" id=1]
 [ext_resource path="res://Assets/HUD/background1.png" type="Texture" id=2]
 [ext_resource path="res://GUI/SimpleButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/HUD/7.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sounds/CutScene.wav" type="AudioStream" id=5]
 [ext_resource path="res://Assets/HUD/SPLASH_transparent.png" type="Texture" id=6]
 [ext_resource path="res://Assets/HUD/WinScreen.png" type="Texture" id=7]
+[ext_resource path="res://Assets/HUD/Frame.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/Dumb placeholder ant.png" type="Texture" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fall"
@@ -60,9 +63,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -225.56
-margin_top = 264.52
+margin_top = 333.52
 margin_right = -68.5597
-margin_bottom = 328.52
+margin_bottom = 397.52
 rect_scale = Vector2( 3, 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -99,6 +102,7 @@ __meta__ = {
 }
 
 [node name="Frame" parent="Cutscene" instance=ExtResource( 3 )]
+visible = false
 margin_left = 403.12
 margin_top = 45.1991
 margin_right = 459.137
@@ -108,11 +112,25 @@ disabled = true
 text = "    "
 
 [node name="Sprite" type="Sprite" parent="Cutscene"]
-position = Vector2( 948.1, 394.753 )
-scale = Vector2( 4, 4 )
+position = Vector2( 957.916, 383.45 )
+scale = Vector2( 5, 5 )
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscene"]
 anims/fall = SubResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="Cutscene"]
+position = Vector2( 976.814, 403.869 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 8 )
+
+[node name="Button" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 966.302, 901.231 )
+stream = ExtResource( 5 )
+pitch_scale = 0.6
+
+[node name="Dumb placeholder ant" type="Sprite" parent="."]
+position = Vector2( 1827.95, 928.521 )
+texture = ExtResource( 9 )
 [connection signal="pressed" from="VBoxContainer/Next" to="." method="_on_Next_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
