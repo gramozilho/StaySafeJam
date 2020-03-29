@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tileset.png-6850c3cd49a0284bfec265c67e5084ac.stex"
+path="res://.import/TileSetWaterRock.png-55b4c76f2035ee4b005b401b0a87b544.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Tileset.png"
-dest_files=[ "res://.import/Tileset.png-6850c3cd49a0284bfec265c67e5084ac.stex" ]
+source_file="res://Assets/Sprites/TileSetWaterRock.png"
+dest_files=[ "res://.import/TileSetWaterRock.png-55b4c76f2035ee4b005b401b0a87b544.stex" ]
 
 [params]
 
