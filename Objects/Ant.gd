@@ -131,6 +131,7 @@ func _movement(delta : float) -> void:
 	if (_floor_cast.is_colliding()):
 		if (_floor_cast.get_collider().is_in_group("Walkable")):
 			_is_floorcast_touching = true
+			_is_floorcast_touching = true
 	elif (is_on_floor()):
 		_is_floorcast_touching = true
 	else:
@@ -152,6 +153,7 @@ func _movement(delta : float) -> void:
 		_velocity.y = JUMP_HEIGHT
 		_has_jumped = true
 		$AnimationPlayer.play("Jump")
+		$JumpSound.play()
 	elif (Input.is_action_just_pressed("move_jump")):
 		_jump_before_land_timer.start()
 	
