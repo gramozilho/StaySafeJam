@@ -23,6 +23,8 @@ var _is_falling := false
 var _has_just_fallen := false
 var _has_jumped := false
 
+var is_dead := false
+
 enum MOVEMENT_STATES {
 	NORMAL,
 	FROZEN,
@@ -34,12 +36,10 @@ func _ready() -> void:
 	pass
 
 func die() -> void:
-	var camera : Camera2D = get_node("Camera2D")
-	if (is_instance_valid(camera)):
-		remove_child(camera)
-	
-	AntManager.add_ant(self, camera, Vector2(512, 512))
-	call_deferred("free")
+	if (!is_dead):
+		$"Death Sound".play()
+		BackgroundMusic.stream_paused = true
+	is_dead = true
 	pass
 
 func _physics_process(delta : float) -> void:
@@ -79,15 +79,27 @@ func _physics_process(delta : float) -> void:
 	pass
 
 func _movement(delta : float) -> void:
+	randomize()
+	
 	var previous_direction := _direction
 	_direction = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	
+	if (_direction != 0):
+		if (!$"Walk Sound".playing):
+			$"Walk Sound".pitch_scale = rand_range(.8, 1.2)
+			$"Walk Sound".play()
+	else:
+		$"Walk Sound".stop()
+	
 	_velocity.x = lerp(_velocity.x, _direction * MOVE_SPEED, ACCELERATION)
+	
+	if (Input.is_action_just_pressed("move_dash") && _direction != 0 && _is_floorcast_touching):
+		_velocity.x += (_direction * MOVE_SPEED * 10)
 	
 	if (_wall_cast.is_colliding() && _direction != 0):
 		var collider = _wall_cast.get_collider()
 		if (collider.is_class("KinematicBody2D")):
-			position.y -= 16
+			position.y -= 8
 	
 	if (previous_direction != _direction && previous_direction != 0):
 		_animated_sprite.play("Slide")
@@ -117,6 +129,8 @@ func _movement(delta : float) -> void:
 		_is_floorcast_touching = true
 	else:
 		_is_floorcast_touching = false
+	
+	if (!is_on_floor()):
 		_velocity.y += GRAVITY
 	
 	if (is_on_floor()):
@@ -141,4 +155,14 @@ func _movement(delta : float) -> void:
 
 func _on_AnimatedSprite_animation_finished() -> void:
 	_animated_sprite.animation = "Walk"
+	pass
+
+func _on_Death_Sound_finished():
+	var camera : Camera2D = get_node("Camera2D")
+	if (is_instance_valid(camera)):
+		remove_child(camera)
+	
+	AntManager.add_ant(self, camera, Vector2(512, 512))
+	call_deferred("free")
+	BackgroundMusic.stream_paused = false
 	pass
