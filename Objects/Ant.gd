@@ -2,9 +2,9 @@ extends KinematicBody2D
 class_name Ant
 
 const GRAVITY := 6000.0
-const MOVE_SPEED := 30000.0
-const JUMP_HEIGHT := -100000
-const ACCELERATION : = .25
+const MOVE_SPEED := 25000.0
+const JUMP_HEIGHT := -80000
+const ACCELERATION : = .5
 
 var _speed := MOVE_SPEED
 

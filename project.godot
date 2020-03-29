@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "AntEater",
 "language": "GDScript",
 "path": "res://Objects/AntEater.gd"
+}, {
+"base": "Sprite",
+"class": "Flower",
+"language": "GDScript",
+"path": "res://Objects/Flower.gd"
 } ]
 _global_script_class_icons={
 "Ant": "",
-"AntEater": ""
+"AntEater": "",
+"Flower": ""
 }
 
 [application]
@@ -101,11 +107,6 @@ trigger_win={
 trigger_lose={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"unicode":0,"echo":false,"script":null)
- ]
-}
-move_flying_ant={
-"deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 
