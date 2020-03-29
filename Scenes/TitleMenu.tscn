@@ -117,21 +117,21 @@ margin_right = 128.0
 margin_bottom = 144.0
 text = "Level 3"
 
-[node name="Lvl4" parent="LevelSelect/VBoxContainer" instance=ExtResource( 5 )]
+[node name="Lvl4" parent="LevelSelect/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 margin_top = 148.0
 margin_right = 128.0
 margin_bottom = 178.0
 text = "Level 4"
 
-[node name="Lvl5" parent="LevelSelect/VBoxContainer" instance=ExtResource( 5 )]
+[node name="Lvl5" parent="LevelSelect/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 margin_top = 182.0
 margin_right = 128.0
 margin_bottom = 212.0
 text = "Level 5"
 
-[node name="Lvl6" parent="LevelSelect/VBoxContainer" instance=ExtResource( 5 )]
+[node name="Lvl6" parent="LevelSelect/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 margin_top = 216.0
 margin_right = 128.0
